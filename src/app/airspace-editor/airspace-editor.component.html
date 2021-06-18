@@ -1,0 +1,22 @@
+<form [formGroup]="airspaceForm" (ngSubmit)="onSubmit()">
+
+  <div formGroupName="airspace">
+    <h2>Airspace</h2>
+    <select formControlName="atz">
+      <option *ngFor="let x of atz" [ngValue]="x.id">{{x.name}}</option>
+    </select>
+    <select formControlName="ils">
+      <option *ngFor="let x of ils" [ngValue]="x.id">{{x.name}}</option>
+    </select>
+  </div>
+
+  <div formGroupName="options">
+    <h2>Options</h2>
+    <select formControlName="maxlevel">
+      <option *ngFor="let x of maxlevel" [ngValue]="x.id">{{x.name}}</option>
+    </select>
+  </div>
+
+  <button type="submit">Submit</button>
+
+</form>
