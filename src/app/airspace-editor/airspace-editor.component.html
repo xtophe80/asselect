@@ -1,24 +1,54 @@
 <form [formGroup]="airspaceForm" (ngSubmit)="onSubmit()">
 
-  <div formGroupName="airspace">
-    <h2>Airspace</h2>
-    <select formControlName="atz">
-      <option *ngFor="let x of atz" [ngValue]="x.id">{{x.name}}</option>
-    </select>
-    <select formControlName="ils">
-      <option *ngFor="let x of ils" [ngValue]="x.id">{{x.name}}</option>
-    </select>
-  </div>
+  <mat-tab-group>
+    <mat-tab label="Main">
+      <div formGroupName="airspace">
+        <h2>Airspace</h2>
 
-  <div formGroupName="options">
-    <h2>Options</h2>
-    <select formControlName="maxlevel">
-      <option *ngFor="let x of maxlevel" [ngValue]="x.id">{{x.name}}</option>
-    </select>
-  </div>
+        <mat-form-field>
+          <mat-label>ATZ:</mat-label>
+          <select matNativeControl formControlName="atz">
+            <option *ngFor="let x of atz" [ngValue]="x.id">{{x.name}}</option>
+          </select>
+        </mat-form-field>
 
-  <app-rats-editor [airspaceForm]="airspaceForm" [yaixm]="yaixm"></app-rats-editor>
+        <mat-form-field>
+          <mat-label>ILS Feather:</mat-label>
+          <select matNativeControl formControlName="ils">
+            <option *ngFor="let x of ils" [ngValue]="x.id">{{x.name}}</option>
+          </select>
+        </mat-form-field>
 
-  <button type="submit">Submit</button>
+        <mat-form-field>
+          <mat-label>Unlicensed A/F:</mat-label>
+          <select matNativeControl formControlName="unlicensedAirfield">
+            <option *ngFor="let x of unlicensedAirfield" [ngValue]="x.id">{{x.name}}</option>
+          </select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Gliding A/F:</mat-label>
+          <select matNativeControl formControlName="glidingAirfield">
+            <option *ngFor="let x of glidingAirfield" [ngValue]="x.id">{{x.name}}</option>
+          </select>
+        </mat-form-field>
+      </div>
+
+      <div formGroupName="options">
+        <h2>Options</h2>
+        <select formControlName="maxlevel">
+          <option *ngFor="let x of maxlevel" [ngValue]="x.id">{{x.name}}<option>
+        </select>
+      </div>
+
+    </mat-tab>
+
+    <mat-tab label="Extras">
+      <app-rats-editor [airspaceForm]="airspaceForm" [yaixm]="yaixm"></app-rats-editor>
+    </mat-tab>
+
+  </mat-tab-group>
+
+  <button mat-fab color="primary" type="submit">Submit</button>
 
 </form>

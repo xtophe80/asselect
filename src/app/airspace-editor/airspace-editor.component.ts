@@ -22,6 +22,19 @@ export class AirspaceEditorComponent implements OnInit {
     { id: 'classg', name: 'Class G'}
   ];
 
+  unlicensedAirfield = [
+    { id: 'exclude', name: 'Exclude' },
+    { id: 'classf', name: 'Class F'},
+    { id: 'classg', name: 'Class G'}
+  ];
+
+  glidingAirfield = [
+    { id: 'exclude', name: 'Exclude' },
+    { id: 'gsec', name: 'Gliding Sector' },
+    { id: 'classf', name: 'Class F'},
+    { id: 'classg', name: 'Class G'}
+  ];
+
   maxlevel = [
     { id: 'unlimited', name: 'Unlimited' },
     { id: 'fl195', name: 'FL195'},
@@ -33,7 +46,9 @@ export class AirspaceEditorComponent implements OnInit {
   airspaceForm = this.fb.group({
     airspace: this.fb.group({
       atz: ['classd'],
-      ils: ['classf']
+      ils: ['classf'],
+      unlicensedAirfield: ['exclude'],
+      glidingAirfield: ['exclude']
     }),
     options: this.fb.group({
       maxlevel: ['unlimited']
