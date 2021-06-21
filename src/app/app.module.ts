@@ -8,11 +8,13 @@ import { environment } from '../environments/environment';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { AirspaceEditorComponent } from './airspace-editor/airspace-editor.component';
+import { RatsEditorComponent } from './rats-editor/rats-editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AirspaceEditorComponent
+    AirspaceEditorComponent,
+    RatsEditorComponent
   ],
   imports: [
     BrowserModule,

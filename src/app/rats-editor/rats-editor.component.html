@@ -1,0 +1,11 @@
+<div [formGroup]="airspaceForm">
+  <div formArrayName="rats">
+    <h2>RATS!</h2>
+    <ul *ngFor="let rat of names; index as i">
+      <li>
+        <label>{{rat}}</label>
+        <input type="checkbox" [formControlName]="i">
+      </li>
+    </ul>
+  </div>
+</div>
