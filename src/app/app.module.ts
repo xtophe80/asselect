@@ -17,6 +17,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 
+import {FlexLayoutModule } from '@angular/flex-layout';
+
+import {LayoutModule} from '@angular/cdk/layout';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +36,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatSelectModule,
     MatInputModule,
     MatTabsModule,
+    FlexLayoutModule,
+    LayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

@@ -1,3 +1,5 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center">
+<div fxFlex="80%" fxFlex.xs="95%">
 <form [formGroup]="airspaceForm" (ngSubmit)="onSubmit()">
 
   <mat-tab-group>
@@ -5,33 +7,37 @@
       <div formGroupName="airspace">
         <h2>Airspace</h2>
 
-        <mat-form-field>
-          <mat-label>ATZ:</mat-label>
-          <select matNativeControl formControlName="atz">
-            <option *ngFor="let x of atz" [ngValue]="x.id">{{x.name}}</option>
-          </select>
-        </mat-form-field>
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
+            <mat-form-field>
+              <mat-label>ATZ:</mat-label>
+              <select matNativeControl formControlName="atz">
+                <option *ngFor="let x of atz" [ngValue]="x.id">{{x.name}}</option>
+              </select>
+            </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>ILS Feather:</mat-label>
-          <select matNativeControl formControlName="ils">
-            <option *ngFor="let x of ils" [ngValue]="x.id">{{x.name}}</option>
-          </select>
-        </mat-form-field>
+            <mat-form-field>
+              <mat-label>ILS Feather:</mat-label>
+              <select matNativeControl formControlName="ils">
+                <option *ngFor="let x of ils" [ngValue]="x.id">{{x.name}}</option>
+              </select>
+            </mat-form-field>
+          </div>
 
-        <mat-form-field>
-          <mat-label>Unlicensed A/F:</mat-label>
-          <select matNativeControl formControlName="unlicensedAirfield">
-            <option *ngFor="let x of unlicensedAirfield" [ngValue]="x.id">{{x.name}}</option>
-          </select>
-        </mat-form-field>
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
+            <mat-form-field>
+              <mat-label>Unlicensed A/F:</mat-label>
+              <select matNativeControl formControlName="unlicensedAirfield">
+                <option *ngFor="let x of unlicensedAirfield" [ngValue]="x.id">{{x.name}}</option>
+              </select>
+            </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>Gliding A/F:</mat-label>
-          <select matNativeControl formControlName="glidingAirfield">
-            <option *ngFor="let x of glidingAirfield" [ngValue]="x.id">{{x.name}}</option>
-          </select>
-        </mat-form-field>
+            <mat-form-field>
+              <mat-label>Gliding A/F:</mat-label>
+              <select matNativeControl formControlName="glidingAirfield">
+                <option *ngFor="let x of glidingAirfield" [ngValue]="x.id">{{x.name}}</option>
+              </select>
+            </mat-form-field>
+          </div>
       </div>
 
       <div formGroupName="options">
@@ -52,3 +58,5 @@
   <button mat-fab color="primary" type="submit">Submit</button>
 
 </form>
+</div>
+</div>
