@@ -3,3 +3,13 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Allow long checkbox labels to wrap */
+.mat-checkbox-layout{
+white-space: normal !important;
+
+}
+.mat-checkbox-inner-container{
+    margin-top: 4px !important;
+}
+
