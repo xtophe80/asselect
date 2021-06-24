@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
-import { ReactiveFormsModule } from '@angular/forms';
 import { AirspaceEditorComponent } from './airspace-editor/airspace-editor.component';
 import { RatsEditorComponent } from './rats-editor/rats-editor.component';
+import { LoaEditorComponent } from './loa-editor/loa-editor.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatButtonModule} from '@angular/material/button';
@@ -19,14 +21,14 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import {FlexLayoutModule } from '@angular/flex-layout';
-
 import {LayoutModule} from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
     AppComponent,
     AirspaceEditorComponent,
-    RatsEditorComponent
+    RatsEditorComponent,
+    LoaEditorComponent
   ],
   imports: [
     BrowserModule,

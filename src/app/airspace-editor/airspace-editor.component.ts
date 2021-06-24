@@ -107,7 +107,8 @@ export class AirspaceEditorComponent implements OnInit {
       souths: '49',
       format: 'openair'
     }),
-    rats: this.fb.array([])
+    rats: this.fb.array([]),
+    loa: this.fb.array([])
   });
 
   constructor(private fb: FormBuilder,
