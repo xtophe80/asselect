@@ -1,11 +1,14 @@
 <div [formGroup]="airspaceForm">
   <div formArrayName="rats">
     <h2>RATS!</h2>
-    <ul *ngFor="let rat of names; index as i">
-      <li>
-        <label>{{rat}}</label>
-        <input type="checkbox" [formControlName]="i">
-      </li>
-    </ul>
+
+    <div fxLayout="row wrap" fxLayoutGap="5px grid">
+      <div *ngFor="let rat of names; index as i">
+        <mat-checkbox fxFlex="20em" [formControlName]="i">
+          {{rat}}
+        </mat-checkbox>
+      </div>
+    </div>
+
   </div>
 </div>

@@ -16,6 +16,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import {FlexLayoutModule } from '@angular/flex-layout';
 
@@ -36,6 +37,7 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatSelectModule,
     MatInputModule,
     MatTabsModule,
+    MatCheckboxModule,
     FlexLayoutModule,
     LayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', {

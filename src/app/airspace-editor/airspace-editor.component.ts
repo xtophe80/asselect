@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import {YaixmService } from '../yaixm.service';
+
 @Component({
   selector: 'app-airspace-editor',
   templateUrl: './airspace-editor.component.html',
@@ -35,7 +36,23 @@ export class AirspaceEditorComponent implements OnInit {
     { id: 'classg', name: 'Class G'}
   ];
 
-  maxlevel = [
+  microlightAirfield = [
+    { id: 'exclude', name: 'Exclude' },
+    { id: 'classf', name: 'Class F'},
+    { id: 'classg', name: 'Class G'}
+  ];
+
+  hirtaGvs = [
+    { id: 'exclude', name: 'Exclude' },
+    { id: 'include', name: 'Include'}
+  ];
+
+  obstacle = [
+    { id: 'exclude', name: 'Exclude' },
+    { id: 'include', name: 'Include'}
+  ];
+
+  maxLevels = [
     { id: 'unlimited', name: 'Unlimited' },
     { id: 'fl195', name: 'FL195'},
     { id: 'fl125', name: 'FL125'},
@@ -43,15 +60,44 @@ export class AirspaceEditorComponent implements OnInit {
     { id: 'fl65', name: 'FL65'}
   ];
 
+  radioFreqs = [
+    { id: 'no', name: 'No' },
+    { id: 'append', name: 'Append'}
+  ];
+
+  norths = [
+    { id: '59', name: 'None' },
+    { id: '54.9', name: 'Carlisle' },
+    { id: '53.7', name: 'Hull' },
+    { id: '52.9', name: 'Nottingham' }
+  ];
+
+  souths = [
+    { id: '49', name: 'None' },
+    { id: '51.8', name: 'Oxford' },
+    { id: '52.9', name: 'Nottingham' },
+    { id: '53.7', name: 'Hull' },
+    { id: '54.9', name: 'Carlisle' }
+  ];
+
+  glidingSites: string[] = ['None'];
+
   airspaceForm = this.fb.group({
     airspace: this.fb.group({
-      atz: ['classd'],
-      ils: ['classf'],
-      unlicensedAirfield: ['exclude'],
-      glidingAirfield: ['exclude']
+      atz: 'classd',
+      ils: 'atz',
+      unlicensedAirfield: 'exclude',
+      glidingAirfield: 'exclude',
+      homeAirfield: 'None',
+      microlightAirfield: 'exclude',
+      hirtaGvs: 'exclude',
+      obstacle: 'exclude'
     }),
     options: this.fb.group({
-      maxlevel: ['unlimited']
+      maxLevels: 'unlimited',
+      radioFreqs: 'no',
+      norths: '59',
+      souths: '49'
     }),
     rats: this.fb.array([])
   });
