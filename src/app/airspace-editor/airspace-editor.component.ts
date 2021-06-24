@@ -80,6 +80,13 @@ export class AirspaceEditorComponent implements OnInit {
     { id: '54.9', name: 'Carlisle' }
   ];
 
+  format = [
+    { id: 'openair', 'name': 'OpenAir (recommended)' },
+    { id: 'tnp', 'name': 'TNP'  },
+    { id: 'ratonly', 'name': 'OpenAir, RA(T) only' },
+    { id: 'competition', 'name': 'Competition' }
+  ];
+
   glidingSites: string[] = ['None'];
 
   airspaceForm = this.fb.group({
@@ -91,13 +98,14 @@ export class AirspaceEditorComponent implements OnInit {
       homeAirfield: 'None',
       microlightAirfield: 'exclude',
       hirtaGvs: 'exclude',
-      obstacle: 'exclude'
+      obstacle: 'exclude',
     }),
     options: this.fb.group({
       maxLevels: 'unlimited',
       radioFreqs: 'no',
       norths: '59',
-      souths: '49'
+      souths: '49',
+      format: 'openair'
     }),
     rats: this.fb.array([])
   });
