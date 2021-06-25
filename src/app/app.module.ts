@@ -22,13 +22,15 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import {FlexLayoutModule } from '@angular/flex-layout';
 import {LayoutModule} from '@angular/cdk/layout';
+import { WaveEditorComponent } from './wave-editor/wave-editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AirspaceEditorComponent,
     RatsEditorComponent,
-    LoaEditorComponent
+    LoaEditorComponent,
+    WaveEditorComponent
   ],
   imports: [
     BrowserModule,

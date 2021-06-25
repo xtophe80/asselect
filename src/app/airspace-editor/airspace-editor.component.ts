@@ -108,7 +108,8 @@ export class AirspaceEditorComponent implements OnInit {
       format: 'openair'
     }),
     rats: this.fb.array([]),
-    loa: this.fb.array([])
+    loa: this.fb.array([]),
+    wave: this.fb.array([])
   });
 
   constructor(private fb: FormBuilder,
@@ -121,6 +122,12 @@ export class AirspaceEditorComponent implements OnInit {
   getYaixm() {
     this.yaixmService.getYaixm().subscribe(yaixm => {
       this.yaixm = yaixm;
+
+      this.glidingSites = this.yaixm['airspace']
+        .filter((x: any) => x['localtype'] === 'GLIDER' &&
+                           x['type'] === 'OTHER')
+        .map((x: any) => x['name']);
+      this.glidingSites.unshift('None');
     })
   }
 
