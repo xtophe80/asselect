@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
 
   yaixm = undefined;
 
+  airac = "";
+
   airspaceFormGroup = this.fb.group({
     atz: 'classd',
     ils: 'atz',
@@ -61,6 +63,9 @@ export class AppComponent implements OnInit {
   getYaixm() {
     this.yaixmService.getYaixm().subscribe(yaixm => {
       this.yaixm = yaixm;
+
+      // Set AIRAC date
+      this.airac = yaixm['release']['airac_date'].substr(0, 10);
 
       // Get RATs
       this.ratNames = yaixm['rat'].map((x: any) => x['name']);

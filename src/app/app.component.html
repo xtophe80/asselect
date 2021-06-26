@@ -15,7 +15,10 @@
         </mat-tab>
       </mat-tab-group>
 
-      <button mat-raised-button color="primary" type="submit">Save</button>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <button mat-raised-button fxFlex="initial" color="primary" type="submit">Save</button>
+        <p  class="mat-body-1" fxFlex="initial">AIRAC: {{airac}}</p>
+      </div>
 
     </form>
   </div>
