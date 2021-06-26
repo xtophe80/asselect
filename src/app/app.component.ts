@@ -5,6 +5,7 @@ import { PromptUpdateService } from './prompt-update.service'
 
 import { YaixmService } from './yaixm.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -105,5 +106,9 @@ export class AppComponent implements OnInit {
 
     let waves = this.waveNames.filter((e, i) => this.waveFormArray.at(i).value);
     localStorage.setItem('wave', JSON.stringify(waves));
+
+    let blob = new Blob(["Hello from ASSelect"],
+                        { type: "text/plain;charset=utf-8" });
+    saveAs(blob, "openair.txt");
   }
 }
