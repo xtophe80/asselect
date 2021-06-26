@@ -30,4 +30,9 @@ export class LoaEditorComponent implements OnChanges {
       })
     }
   }
+
+  clearall() {
+    let loaArray = this.airspaceForm.get('loa') as FormArray;
+    loaArray.reset();
+  }
 }

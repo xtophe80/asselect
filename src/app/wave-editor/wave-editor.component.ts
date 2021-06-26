@@ -30,4 +30,9 @@ export class WaveEditorComponent implements OnChanges {
       })
     }
   }
+
+  clearall() {
+    let waveArray = this.airspaceForm.get('wave') as FormArray;
+    waveArray.reset();
+  }
 }

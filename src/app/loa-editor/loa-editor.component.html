@@ -1,6 +1,9 @@
 <ng-container [formGroup]="airspaceForm">
   <div formArrayName="loa">
-    <p><strong>Local Agreements</strong><p>
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em">
+      <p fxFlex="initial"><strong>Local Agreements</strong></p>
+      <button fxFlex="initial" mat-button color="primary" type="button" (click)="clearall()">Clear</button>
+    </div>
 
     <div fxLayout="row wrap" fxLayoutGap="5px grid" fxAlign="start">
       <div fxFlex="33%" fxFlex.lt-sm="100%" fxFlex.lt-lg="50%" *ngFor="let loa of names; index as i">
