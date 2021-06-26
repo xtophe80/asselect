@@ -94,5 +94,14 @@ export class AppComponent implements OnInit {
                          JSON.stringify(this.formGroup.get('airspace')?.value));
     localStorage.setItem('options',
                          JSON.stringify(this.formGroup.get('options')?.value));
+
+    let rats = this.ratNames.filter((e, i) => this.ratFormArray.at(i).value);
+    localStorage.setItem('rat', JSON.stringify(rats));
+
+    let loas = this.loaNames.filter((e, i) => this.loaFormArray.at(i).value);
+    localStorage.setItem('loa', JSON.stringify(loas));
+
+    let waves = this.waveNames.filter((e, i) => this.waveFormArray.at(i).value);
+    localStorage.setItem('wave', JSON.stringify(waves));
   }
 }
