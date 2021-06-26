@@ -4,7 +4,8 @@
 
       <mat-tab-group dynamicHeight>
         <mat-tab label="Main">
-          <app-airspace-editor [airspaceForm]="formGroup"></app-airspace-editor>
+          <app-airspace-editor [yaixm]="yaixm" [airspaceForm]="formGroup"></app-airspace-editor>
+          <app-option-editor [airspaceForm]="formGroup"></app-option-editor>
         </mat-tab>
 
         <mat-tab label="Extras">
