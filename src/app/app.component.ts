@@ -70,7 +70,9 @@ export class AppComponent implements OnInit {
       }
 
       // Get LOAs
-      this.loaNames = yaixm['loa'].map((x: any) => x['name']);
+      this.loaNames = yaixm['loa']
+        .filter((x: any) => x['default'] !== true)
+        .map((x: any) => x['name']);
 
       this.loaFormArray.clear();
       for (let i = 0; i < this.loaNames.length; i++) {
