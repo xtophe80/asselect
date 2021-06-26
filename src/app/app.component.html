@@ -1,1 +1,21 @@
-<app-airspace-editor></app-airspace-editor>
+<div class="container" fxLayout="row" fxLayoutAlign="center">
+  <div fxFlex="80%" fxFlex.xs="95%">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+      <mat-tab-group dynamicHeight>
+        <mat-tab label="Main">
+          <app-airspace-editor [airspaceForm]="formGroup"></app-airspace-editor>
+        </mat-tab>
+
+        <mat-tab label="Extras">
+          <app-rats-editor [airspaceForm]="formGroup" [names]="ratNames"></app-rats-editor>
+          <app-loa-editor [airspaceForm]="formGroup" [names]="loaNames"></app-loa-editor>
+          <app-wave-editor [airspaceForm]="formGroup" [names]="waveNames"></app-wave-editor>
+        </mat-tab>
+      </mat-tab-group>
+
+      <button mat-raised-button color="primary" type="submit">Save</button>
+
+    </form>
+  </div>
+</div>

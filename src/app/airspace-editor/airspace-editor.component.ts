@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-
-import {YaixmService } from '../yaixm.service';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-airspace-editor',
   templateUrl: './airspace-editor.component.html',
   styleUrls: ['./airspace-editor.component.css']
 })
-export class AirspaceEditorComponent implements OnInit {
+export class AirspaceEditorComponent implements OnInit, OnChanges {
 
-  yaixm = Object();
+  @Input() yaixm: any;
+  @Input() airspaceForm: FormGroup = new FormGroup({});
 
   atz = [
     { id: 'classd', name: 'Class D' },
@@ -89,35 +88,9 @@ export class AirspaceEditorComponent implements OnInit {
 
   glidingSites: string[] = ['None'];
 
-  airspaceForm = this.fb.group({
-    airspace: this.fb.group({
-      atz: 'classd',
-      ils: 'atz',
-      unlicensedAirfield: 'exclude',
-      glidingAirfield: 'exclude',
-      homeAirfield: 'None',
-      microlightAirfield: 'exclude',
-      hirtaGvs: 'exclude',
-      obstacle: 'exclude',
-    }),
-    options: this.fb.group({
-      maxLevels: 'unlimited',
-      radioFreqs: 'no',
-      norths: '59',
-      souths: '49',
-      format: 'openair'
-    }),
-    rats: this.fb.array([]),
-    loa: this.fb.array([]),
-    wave: this.fb.array([])
-  });
-
-  constructor(private fb: FormBuilder,
-              private yaixmService: YaixmService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.getYaixm();
-
     let value = localStorage.getItem('airspace');
     if (typeof(value) === 'string') {
       let settings = JSON.parse(value);
@@ -139,22 +112,17 @@ export class AirspaceEditorComponent implements OnInit {
     }
   }
 
-  getYaixm() {
-    this.yaixmService.getYaixm().subscribe(yaixm => {
-      this.yaixm = yaixm;
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.yaixm === undefined) {
+      return;
+    }
 
-      this.glidingSites = this.yaixm['airspace']
-        .filter((x: any) => x['localtype'] === 'GLIDER' &&
-                           x['type'] === 'OTHER')
-        .map((x: any) => x['name']);
-      this.glidingSites.unshift('None');
-    })
-  }
-
-  onSubmit() {
-    localStorage.setItem('airspace',
-                         JSON.stringify(this.airspaceForm.get('airspace')?.value));
-    localStorage.setItem('options',
-                         JSON.stringify(this.airspaceForm.get('options')?.value));
+    if (this.yaixm !== undefined) {
+    this.glidingSites = this.yaixm['airspace']
+      .filter((x: any) => x['localtype'] === 'GLIDER' &&
+                         x['type'] === 'OTHER')
+      .map((x: any) => x['name']);
+    this.glidingSites.unshift('None');
+    }
   }
 }

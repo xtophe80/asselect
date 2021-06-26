@@ -1,6 +1,5 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { YaixmService } from '../yaixm.service';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-loa-editor',
@@ -10,20 +9,7 @@ import { YaixmService } from '../yaixm.service';
 export class LoaEditorComponent {
 
   @Input() airspaceForm: FormGroup = new FormGroup({});
-  @Input() yaixm = Object();
+  @Input() names: string[] = [];
 
-  names: string[] = [];
-  constructor() { }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.yaixm['loa'] === undefined)
-      return;
-
-    let formArray = this.airspaceForm.get('loa') as FormArray;
-
-    for (let loa of this.yaixm['loa']) {
-      this.names.push(loa['name']);
-      formArray.push(new FormControl(false));
-    }
-  }
+  constructor() {}
 }

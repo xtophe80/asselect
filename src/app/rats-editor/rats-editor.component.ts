@@ -1,6 +1,5 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { YaixmService } from '../yaixm.service';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-rats-editor',
@@ -10,21 +9,7 @@ import { YaixmService } from '../yaixm.service';
 export class RatsEditorComponent {
 
   @Input() airspaceForm: FormGroup = new FormGroup({});
-  @Input() yaixm = Object();
-
-  names: string[] = [];
+  @Input() names: string[] = []
 
   constructor() {}
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.yaixm['rat'] === undefined)
-      return;
-
-    let formArray = this.airspaceForm.get('rats') as FormArray;
-
-    for (let rat of this.yaixm['rat']) {
-      this.names.push(rat['name']);
-      formArray.push(new FormControl(false));
-    }
-  }
 }
