@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import {YaixmService } from '../yaixm.service';
 
@@ -117,6 +117,26 @@ export class AirspaceEditorComponent implements OnInit {
 
   ngOnInit() {
     this.getYaixm();
+
+    let value = localStorage.getItem('airspace');
+    if (typeof(value) === 'string') {
+      let settings = JSON.parse(value);
+
+      let asGroup = this.airspaceForm.get('airspace') as FormGroup;
+      for (let control in asGroup.controls) {
+        asGroup.get(control)?.setValue(settings[control]);
+      }
+    }
+
+    value = localStorage.getItem('options');
+    if (typeof(value) === 'string') {
+      let settings = JSON.parse(value);
+
+      let optGroup = this.airspaceForm.get('options') as FormGroup;
+      for (let control in optGroup.controls) {
+        optGroup.get(control)?.setValue(settings[control]);
+      }
+    }
   }
 
   getYaixm() {
@@ -132,6 +152,9 @@ export class AirspaceEditorComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.airspaceForm.value);
+    localStorage.setItem('airspace',
+                         JSON.stringify(this.airspaceForm.get('airspace')?.value));
+    localStorage.setItem('options',
+                         JSON.stringify(this.airspaceForm.get('options')?.value));
   }
 }
