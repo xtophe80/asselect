@@ -32,7 +32,6 @@ export class RatsEditorComponent implements OnChanges {
   }
 
   clearall() {
-    console.log('clearall');
     let ratArray = this.airspaceForm.get('rat') as FormArray;
     ratArray.reset();
   }
