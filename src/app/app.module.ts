@@ -17,7 +17,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { LayoutModule } from '@angular/cdk/layout';
 
 import { FileSaverModule } from 'ngx-filesaver';
 
@@ -47,7 +46,6 @@ import { WaveEditorComponent } from './wave-editor/wave-editor.component';
     MatTabsModule,
     MatCheckboxModule,
     FlexLayoutModule,
-    LayoutModule,
     FileSaverModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
