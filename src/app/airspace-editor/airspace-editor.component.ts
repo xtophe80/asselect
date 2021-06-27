@@ -68,16 +68,12 @@ export class AirspaceEditorComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.yaixm === undefined) {
-      return;
-    }
-
-    if (this.yaixm !== undefined) {
-    this.glidingSites = this.yaixm['airspace']
-      .filter((x: any) => x['localtype'] === 'GLIDER' &&
-                         x['type'] === 'OTHER')
-      .map((x: any) => x['name']);
-    this.glidingSites.unshift('None');
+    if (this.yaixm.airspace !== undefined) {
+      this.glidingSites = this.yaixm.airspace
+        .filter((x: any) =>
+                x['localtype'] === 'GLIDER' && x['type'] === 'OTHER')
+        .map((x: any) => x['name']);
+      this.glidingSites.unshift('None');
     }
   }
 }

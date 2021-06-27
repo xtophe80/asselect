@@ -5,7 +5,6 @@ import { PromptUpdateService } from './prompt-update.service'
 
 import { YaixmService } from './yaixm.service';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +12,7 @@ import { YaixmService } from './yaixm.service';
 })
 export class AppComponent implements OnInit {
 
-  yaixm = undefined;
+  yaixm: any = {};
 
   airac = "";
 
