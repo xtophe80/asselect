@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PromptUpdateService } from './prompt-update.service'
 
 import { YaixmService } from './yaixm.service';
+import { convert } from './yaixm';
 
 @Component({
   selector: 'app-root',
@@ -28,10 +29,10 @@ export class AppComponent implements OnInit {
   });
 
   optionsFormGroup = this.fb.group({
-    maxLevels: 'unlimited',
+    maxLevel: '66000',
     radioFreqs: 'no',
-    norths: '59',
-    souths: '49',
+    north: '59',
+    south: '49',
     format: 'openair'
   });
 
@@ -97,10 +98,11 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit() {
-    localStorage.setItem('airspace',
-                         JSON.stringify(this.formGroup.get('airspace')?.value));
-    localStorage.setItem('options',
-                         JSON.stringify(this.formGroup.get('options')?.value));
+    let airspace = this.formGroup.get('airspace')?.value;
+    localStorage.setItem('airspace', JSON.stringify(airspace));
+
+    let options = this.formGroup.get('options')?.value;
+    localStorage.setItem('options', JSON.stringify(options));
 
     let rats = this.ratNames.filter((e, i) => this.ratFormArray.at(i).value);
     localStorage.setItem('rat', JSON.stringify(rats));
@@ -111,8 +113,19 @@ export class AppComponent implements OnInit {
     let waves = this.waveNames.filter((e, i) => this.waveFormArray.at(i).value);
     localStorage.setItem('wave', JSON.stringify(waves));
 
-    let blob = new Blob(["Hello from ASSelect"],
-                        { type: "text/plain;charset=utf-8" });
+    // Wave boxes to be excluded
+    let exclude = this.waveNames.filter((e, i) => !this.waveFormArray.at(i).value);
+
+    let opts = {
+      'airspace': airspace,
+      'options': options,
+      'rats': rats,
+      'loas': loas,
+      'waves': exclude
+    };
+    let txt = convert(this.yaixm, opts);
+
+    let blob = new Blob([txt], { type: "text/plain;charset=utf-8" });
     saveAs(blob, "openair.txt");
   }
 }

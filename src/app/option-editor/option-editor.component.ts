@@ -11,11 +11,11 @@ export class OptionEditorComponent implements OnInit {
   @Input() airspaceForm: FormGroup = new FormGroup({});
 
   maxLevels = [
-    { id: 'unlimited', name: 'Unlimited' },
-    { id: 'fl195', name: 'FL195'},
-    { id: 'fl125', name: 'FL125'},
-    { id: 'fl105', name: 'FL105'},
-    { id: 'fl65', name: 'FL65'}
+    { id: '66000', name: 'Unlimited' },
+    { id: '19500', name: 'FL195'},
+    { id: '12500', name: 'FL125'},
+    { id: '10500', name: 'FL105'},
+    { id: '6500', name: 'FL65'}
   ];
 
   radioFreqs = [

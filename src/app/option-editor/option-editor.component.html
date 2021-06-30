@@ -5,7 +5,7 @@
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>Max Level:</mat-label>
-        <select matNativeControl formControlName="maxLevels">
+        <select matNativeControl formControlName="maxLevel">
           <option *ngFor="let x of maxLevels" [ngValue]="x.id">{{x.name}}</option>
         </select>
       </mat-form-field>
@@ -21,14 +21,14 @@
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>Omit North of:</mat-label>
-        <select matNativeControl formControlName="norths">
+        <select matNativeControl formControlName="north">
           <option *ngFor="let x of norths" [ngValue]="x.id">{{x.name}}</option>
         </select>
       </mat-form-field>
 
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>Omit South of:</mat-label>
-        <select matNativeControl formControlName="souths">
+        <select matNativeControl formControlName="south">
           <option *ngFor="let x of souths" [ngValue]="x.id">{{x.name}}</option>
         </select>
       </mat-form-field>
