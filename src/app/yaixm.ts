@@ -38,12 +38,15 @@ export function convert(yaixm: any, opts: any): string {
   // Airspace name function
   const namer = makeNameFuction(opts);
 
+  // Airspace type function
+  const typer = makeTypeFunction(opts);
+
   // Create the output data
   let lines: string[] = [];
   airspace.forEach( (feature: any) => {
     feature.geometry.forEach( (volume: any) => {
       if (airfilter(feature, volume)) {
-        lines.push(...doVolume(feature, volume, namer));
+        lines.push(...doVolume(feature, volume, namer, typer));
       }
     });
   });
@@ -97,11 +100,107 @@ function makeAirfilter(opts: any) {
   return airfilter;
 }
 
+// Factory to create airspace type function. Types are:
+//   A - G (class)
+//   P (prohibited)
+//   Q (danger)
+//   R (restricted)
+//   CTR (control area)
+//   RMZ (radio mandatory zone)
+//   TMZ (transponder mandatory zone)
+//   W (wave)
+//   MATZ (military ATZ)
+//   OTHER
+function makeTypeFunction(opts: any) {
+  const atz = (opts.airspace.atz === 'ctr') ? "CTR" : "D";
+
+  const ilsTypes = {atz: atz, classf: "F", classg: "G"};
+  const ils = ilsTypes[opts.airspace.ils as keyof typeof ilsTypes];
+
+  const noatz = (opts.airspace.unlicenseAirfield === 'classf') ? "F" : "G";
+
+  const ul = (opts.airspace.microlightAirfield === 'classf') ? "F" : "G";
+
+  const gliderTypes = {classf: "F", classg: "G", gsec: "W"};
+  const glider = gliderTypes[opts.airspace.glidingAirield as keyof typeof gliderTypes];
+
+  const comp = (opts.options.format === 'competition');
+
+  function airspaceTyper(feature: any, volume: any): string {
+    const rules = (feature.rules || []).concat(volume.rules || []);
+
+    let out = "";
+    if (rules.includes("NOTAM"))
+      out = "G";
+    else if (feature.type === "ATZ")
+      out = atz;
+    else if (feature.type === "D") {
+      out = (comp && rules.includes("SI")) ? "P" : "Q";
+    }
+    else if (feature.type === "D_OTHER") {
+      if (feature.localtype === "GLIDER")
+        // Wave box
+        out = "W";
+      else if (comp && feature.localtype === "DZ" && rules.includes("INTENSE"))
+        // Intense DZ's for comp airspace
+        out = "P";
+      else
+        // Danger area, Drop zone, etc.
+        out = "Q";
+    }
+    else if (feature.type === "OTHER") {
+      switch (feature.localtype) {
+        case "GLIDER":
+          out = (rules.includes("LOA")) ? "W": glider;
+          break;
+        case "ILS":
+          out = ils;
+          break;
+        case "MATZ":
+          out = "MATZ";
+          break;
+        case "NOATZ":
+          out = noatz;
+          break;
+        case "RAT":
+          out = "P";
+          break;
+        case "TMZ":
+          out = "TMZ";
+          break;
+        case "UL":
+          out = ul;
+          break;
+        case "RMZ":
+          out = "RMZ";
+          break;
+        default:
+          out = "OTHER";
+          break;
+      }
+    }
+    else if (feature.type === "P")
+      out = "P";
+    else if (feature.type === "R")
+      out = "R";
+    else if (rules.includes("TMZ"))
+      out = "TMZ";
+    else if (rules.includes("RMZ"))
+      out = "RMZ"
+    else
+      out = volume.class || feature.class || "OTHER";
+
+    return out;
+  }
+
+  return airspaceTyper;
+}
+
 // Factory to create airspace naming function
 function makeNameFuction(opts: any) {
   const addSeqno = opts.options.format === 'competition';
 
-  function airspaceNamer(volume: any, feature: any): string {
+  function airspaceNamer(feature: any, volume: any): string {
     let name = volume.name || feature.name;
     if (!volume.name) {
       const rules = (feature.rules || []).concat(volume.rules || []);
@@ -240,8 +339,24 @@ function level(value: string): number {
     return 0;
 }
 
-function doVolume(feature: any, volume: any, namer: (f: any, v: any)=>string): string[] {
-  return ["*", "AN " + namer(volume, feature)];
+function doVolume(feature: any, volume: any,
+                  namer: (f: any, v: any)=>string,
+                  typer: (f: any, v: any)=>string): string[] {
+  let out = ["*"];
+  out.push(...doType(feature, volume, typer));
+  out.push(...doName(feature, volume, namer));
+
+  return out;
+}
+
+function doType(feature: any, volume: any,
+                typer: (f: any, v: any)=>string): string[] {
+  return ["AC " + typer(feature, volume)];
+}
+
+function doName(feature: any, volume: any,
+                namer: (f: any, v: any)=>string): string[] {
+  return ["AN " + namer(feature, volume)];
 }
 
 // Convert latitude or longitude string to floating point degrees
