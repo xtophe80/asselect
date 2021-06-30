@@ -345,6 +345,7 @@ function doVolume(feature: any, volume: any,
   let out = ["*"];
   out.push(...doType(feature, volume, typer));
   out.push(...doName(feature, volume, namer));
+  out.push(...doLevels(volume));
 
   return out;
 }
@@ -357,6 +358,18 @@ function doType(feature: any, volume: any,
 function doName(feature: any, volume: any,
                 namer: (f: any, v: any)=>string): string[] {
   return ["AN " + namer(feature, volume)];
+}
+
+function doLevels(volume: any) {
+   function levelStr(level: string): string {
+     if (level.endsWith('ft'))
+       return level.slice(0, -3) + "ALT";
+     else
+       return level;
+   }
+
+   return ["AL " + levelStr(volume['lower']),
+           "AH " + levelStr(volume['upper'])];
 }
 
 // Convert latitude or longitude string to floating point degrees
