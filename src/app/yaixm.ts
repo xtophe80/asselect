@@ -4,7 +4,7 @@ const AsciiUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const DmsRe = new RegExp(
   "([0-9]{2}|[01][0-9]{2})" +
   "([0-5][0-9])" +
-  "([0-5][0-9](\.[0-9]{1,3})?)" +
+  "([0-5][0-9](?:\.[0-9]{1,3})?)" +
   "([NESW])");
 
 const NM_TO_DEGREES = 1 / 60;
@@ -506,7 +506,7 @@ function parseDeg(degStr: string): number {
   let deg = 0;
   if (m !== null) {
     deg = parseInt(m[1]) + parseInt(m[2]) / 60 + parseFloat(m[3]) / 3600
-    if ("SW".includes(m[5]))
+    if ("SW".includes(m[4]))
       deg = -deg
   }
 
