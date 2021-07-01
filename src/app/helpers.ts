@@ -34,7 +34,7 @@ export function formatHeader(note: string, airac: string,
   hdr.push("AIRAC: " + airac);
   hdr.push("Produced by asselect.uk: " + new Date().toISOString());
   hdr.push("Commit: " + commit);
-  hdr.push(...wrap(settings).split("\n").map(x => "  " + x));
+  hdr.push(...wrap(settings).split("\n"));
 
   return Header.map(x => (x === "") ? "*" : "* " + x);
 }

@@ -42,7 +42,7 @@ export function convert(yaixm: any, opts: any): string {
   let lines: string[] = formatHeader(yaixm.release.note,
                                      yaixm.release.airac_date.substr(0, 10),
                                      yaixm.release.commit,
-                                     JSON.stringify(opts));
+                                     JSON.stringify(opts).replace(/"/g, ''));
 
   airspace.forEach( (feature: any) => {
     feature.geometry.forEach( (volume: any) => {
