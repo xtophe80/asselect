@@ -346,6 +346,7 @@ function doVolume(feature: any, volume: any,
   out.push(...doType(feature, volume, typer));
   out.push(...doName(feature, volume, namer));
   out.push(...doLevels(volume));
+  out.push(...doBoundary(volume.boundary));
 
   return out;
 }
@@ -360,7 +361,7 @@ function doName(feature: any, volume: any,
   return ["AN " + namer(feature, volume)];
 }
 
-function doLevels(volume: any) {
+function doLevels(volume: any): string[] {
    function levelStr(level: string): string {
      if (level.endsWith('ft'))
        return level.slice(0, -3) + "ALT";
@@ -372,6 +373,132 @@ function doLevels(volume: any) {
            "AH " + levelStr(volume['upper'])];
 }
 
+function segtype(segment: any): string {
+  return Object.keys(segment)[0];
+}
+
+function doBoundary(boundary: any[]): string[] {
+  let point = "";
+
+  let out = [];
+  for (let segment of boundary) {
+
+    if (segtype(segment) === 'circle') {
+      out.push(...doCircle(segment.circle));
+    }
+    else if (segtype(segment) === 'line') {
+      out.push(...doLine(segment.line));
+      [point] = segment.line.slice(-1)
+    }
+    else if (segtype(segment) === 'arc') {
+      out.push(...doArc(segment.arc, point));
+      point = segment.arc.to;
+    }
+  }
+
+  // Close the polygon
+  if (segtype(boundary[0]) !== 'circle') {
+    const [last] = boundary.slice(-1);
+    if (segtype(last) === 'line') {
+      out.push(...doPoint(boundary[0].line[0]));
+    }
+    else if (segtype(last) === 'arc') {
+      if (boundary[0].line[0] !== last.arc.to)
+        out.push(doPoint(boundary[0].line[0]));
+    }
+  }
+
+  return out;
+}
+
+function doLine(line: string[]): string[] {
+  let out: string[] = [];
+  for (let point of line)
+    out.push(doPoint(point));
+
+  return out;
+}
+
+function doCircle(circle: any): string[] {
+  const radius = formatDistance(circle.radius);
+  return [centre(circle.centre), "DC " + radius];
+}
+
+function doArc(arc: any, from: string): string[] {
+  const dir = (arc.dir === "cw") ? "V D=+" : "V D=-";
+  const fromTo = `DB ${formatLatLon(from)},${formatLatLon(arc.to)}`;
+
+  return [dir, centre(arc.centre), fromTo];
+}
+
+function centre(latlon: string): string {
+  return "V X=" + formatLatLon(latlon);
+}
+
+function formatDistance(distance: string): string {
+  let [dist, unit] = distance.split(" ");
+  if (unit = "km")
+    dist = (parseFloat(distance) / 1.852).toFixed(3);
+
+  return dist;
+}
+
+// Airspace boundary point
+function doPoint(point: string): string {
+  return "DP " + formatLatLon(point)
+}
+
+// Format lat/lon for OpenAir
+function formatLatLon(latlon: string): string {
+  const [latfloat, lonfloat] = parseLatLon(latlon);
+  const x = dms(lonfloat);
+  const y = dms(latfloat);
+
+  const latStr = `${pad(y.d, 2)}:${pad(y.m, 2)}:${pad(y.s, 2)} ${y.ns}`;
+  const lonStr = `${pad(x.d, 3)}:${pad(x.m, 2)}:${pad(x.s, 2)} ${x.ew}`;
+
+  return latStr + " " + lonStr;
+}
+
+// Pad with leading zeroes
+function pad(val: number, len: number) {
+  let out: string = val.toFixed(0);
+  while (out.length < len)
+    out = "0" + out;
+
+  return out;
+}
+
+// Return integer DMS values for floating point degrees
+function dms(deg: number):
+  {d: number, m: number, s: number, ns: string, ew: string} {
+
+  let ns: string;;
+  let ew: string;
+  let min: number;
+  let sec:number;
+
+  if (deg < 0) {
+    ns = "S";
+    ew = "W";
+    deg = -deg;
+  }
+  else {
+    ns = "N";
+    ew = "E";
+  }
+
+  sec = Math.round(deg * 3600)
+
+  min = Math.floor(sec / 60);
+  sec = sec % 60;
+
+  deg = Math.floor(min / 60);
+  min = min % 60;
+
+  return {d: deg, m: min, s: sec, ns: ns, ew: ew};
+}
+
 // Convert latitude or longitude string to floating point degrees
 function parseDeg(degStr: string): number {
   const m = degStr.match(DmsRe);
@@ -379,7 +506,7 @@ function parseDeg(degStr: string): number {
   let deg = 0;
   if (m !== null) {
     deg = parseInt(m[1]) + parseInt(m[2]) / 60 + parseFloat(m[3]) / 3600
-    if ("SW".includes(m[4]))
+    if ("SW".includes(m[5]))
       deg = -deg
   }
 
