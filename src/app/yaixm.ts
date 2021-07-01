@@ -1,11 +1,7 @@
-const AsciiUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+import {formatCentre, formatDistance, formatLatLon,
+        formatLevel, normLevel, parseLatLon} from './helpers';
 
-// Latitude/longitude regex, pattern is: [D]DDMMSS[.s[s[s]]]H
-const DmsRe = new RegExp(
-  "([0-9]{2}|[01][0-9]{2})" +
-  "([0-5][0-9])" +
-  "([0-5][0-9](?:\.[0-9]{1,3})?)" +
-  "([NESW])");
+const AsciiUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 const NM_TO_DEGREES = 1 / 60;
 
@@ -86,7 +82,7 @@ function makeAirfilter(opts: any) {
       return false;
 
     // Maximum level
-    if (level(volume.lower) >= max_level)
+    if (normLevel(volume.lower) >= max_level)
       return false;
 
     // Min/max latitude
@@ -329,16 +325,6 @@ function findVolume(airspace: any[], vid: string): any[] {
   return [undefined, undefined];
 }
 
-// Return "normalised" level from SFC, altitude or flight level
-function level(value: string): number {
-  if (value.startsWith("FL"))
-    return parseInt(value.slice(2)) * 100;
-  else if (value.endsWith("ft"))
-    return parseInt(value.split(" ")[0]);
-  else
-    return 0;
-}
-
 function doVolume(feature: any, volume: any,
                   namer: (f: any, v: any)=>string,
                   typer: (f: any, v: any)=>string): string[] {
@@ -362,19 +348,8 @@ function doName(feature: any, volume: any,
 }
 
 function doLevels(volume: any): string[] {
-   function levelStr(level: string): string {
-     if (level.endsWith('ft'))
-       return level.slice(0, -3) + "ALT";
-     else
-       return level;
-   }
-
-   return ["AL " + levelStr(volume['lower']),
-           "AH " + levelStr(volume['upper'])];
-}
-
-function segtype(segment: any): string {
-  return Object.keys(segment)[0];
+   return ["AL " + formatLevel(volume['lower']),
+           "AH " + formatLevel(volume['upper'])];
 }
 
 function doBoundary(boundary: any[]): string[] {
@@ -421,101 +396,19 @@ function doLine(line: string[]): string[] {
 
 function doCircle(circle: any): string[] {
   const radius = formatDistance(circle.radius);
-  return [centre(circle.centre), "DC " + radius];
+  return [formatCentre(circle.centre), "DC " + radius];
 }
 
 function doArc(arc: any, from: string): string[] {
   const dir = (arc.dir === "cw") ? "V D=+" : "V D=-";
   const fromTo = `DB ${formatLatLon(from)},${formatLatLon(arc.to)}`;
 
-  return [dir, centre(arc.centre), fromTo];
-}
-
-function centre(latlon: string): string {
-  return "V X=" + formatLatLon(latlon);
-}
-
-function formatDistance(distance: string): string {
-  let [dist, unit] = distance.split(" ");
-  if (unit === "km")
-    dist = (parseFloat(distance) / 1.852).toFixed(3);
-
-  return dist;
+  return [dir, formatCentre(arc.centre), fromTo];
 }
 
 // Airspace boundary point
 function doPoint(point: string): string {
   return "DP " + formatLatLon(point)
-}
-
-// Format lat/lon for OpenAir
-function formatLatLon(latlon: string): string {
-  const [latfloat, lonfloat] = parseLatLon(latlon);
-  const x = dms(lonfloat);
-  const y = dms(latfloat);
-
-  const latStr = `${pad(y.d, 2)}:${pad(y.m, 2)}:${pad(y.s, 2)} ${y.ns}`;
-  const lonStr = `${pad(x.d, 3)}:${pad(x.m, 2)}:${pad(x.s, 2)} ${x.ew}`;
-
-  return latStr + " " + lonStr;
-}
-
-// Pad with leading zeroes
-function pad(val: number, len: number) {
-  let out: string = val.toFixed(0);
-  while (out.length < len)
-    out = "0" + out;
-
-  return out;
-}
-
-// Return integer DMS values for floating point degrees
-function dms(deg: number):
-  {d: number, m: number, s: number, ns: string, ew: string} {
-
-  let ns: string;;
-  let ew: string;
-  let min: number;
-  let sec:number;
-
-  if (deg < 0) {
-    ns = "S";
-    ew = "W";
-    deg = -deg;
-  }
-  else {
-    ns = "N";
-    ew = "E";
-  }
-
-  sec = Math.round(deg * 3600)
-
-  min = Math.floor(sec / 60);
-  sec = sec % 60;
-
-  deg = Math.floor(min / 60);
-  min = min % 60;
-
-  return {d: deg, m: min, s: sec, ns: ns, ew: ew};
-}
-
-// Convert latitude or longitude string to floating point degrees
-function parseDeg(degStr: string): number {
-  const m = degStr.match(DmsRe);
-
-  let deg = 0;
-  if (m !== null) {
-    deg = parseInt(m[1]) + parseInt(m[2]) / 60 + parseFloat(m[3]) / 3600
-    if ("SW".includes(m[4]))
-      deg = -deg
-  }
-
-  return deg
-}
-
-// Convert lat/lon string to pair of floats
-function parseLatLon(latlonStr: string): number[] {
-  return latlonStr.split(" ").map(x => parseDeg(x));
 }
 
 // Get (approximate) minimum and maximum latitude for volume
@@ -537,4 +430,8 @@ function minMaxLat(volume: any): number[] {
   }
 
   return [Math.min(...latArr), Math.max(...latArr)];
+}
+
+function segtype(segment: any): string {
+  return Object.keys(segment)[0];
 }
