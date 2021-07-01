@@ -113,15 +113,12 @@ export class AppComponent implements OnInit {
     let waves = this.waveNames.filter((e, i) => this.waveFormArray.at(i).value);
     localStorage.setItem('wave', JSON.stringify(waves));
 
-    // Wave boxes to be excluded
-    let exclude = this.waveNames.filter((e, i) => !this.waveFormArray.at(i).value);
-
     let opts = {
       'airspace': airspace,
       'options': options,
       'rats': rats,
       'loas': loas,
-      'waves': exclude
+      'waves': waves
     };
     let txt = convert(this.yaixm, opts);
 

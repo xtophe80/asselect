@@ -1,17 +1,18 @@
 export const Header = [
-  " UK Airspace",
-  " Alan Sparrow (airspace@asselect.uk)",
+  "UK Airspace",
+  "Alan Sparrow (airspace@asselect.uk)",
   "",
-  " I have tried to make this data as accurate as possible, however",
-  " there will still be errors. Good airmanship is your responsibility,",
-  " not mine - Don't blame me if you go somewhere you shouldn't have",
-  " gone while using this data.",
+  "I have tried to make this data as accurate as possible, however",
+  "there will still be errors. Good airmanship is your responsibility,",
+  "not mine - Don't blame me if you go somewhere you shouldn't have",
+  "gone while using this data.",
   "",
-  " To the extent possible under law, Alan Sparrow has waived all",
-  " copyright and related or neighbouring rights to this file. The data",
-  " in this file is based on the work of others including: George Knight,",
-  " Geoff Brown, Peter Desmond and Rory O'Connor.  The data is originally",
-  " sourced from the UK Aeronautical Information Package (AIP)."
+  "To the extent possible under law, Alan Sparrow has waived all",
+  "copyright and related or neighbouring rights to this file. The data",
+  "in this file is based on the work of others including: George Knight,",
+  "Geoff Brown, Peter Desmond and Rory O'Connor.  The data is originally",
+  "sourced from the UK Aeronautical Information Package (AIP).",
+  ""
 ];
 
 // Latitude/longitude regex, pattern is: [D]DDMMSS[.s[s[s]]]H
@@ -22,8 +23,20 @@ const DmsRe = new RegExp(
   "([NESW])"
 );
 
-export function getHeader(): string[] {
-  return Header.map(x => "*" + x);
+const wrap = (s: string) => s.replace(
+    /(?![^\n]{1,65}$)([^\n]{1,65}),/g, '$1,\n'
+);
+
+export function formatHeader(note: string, airac: string,
+                             commit: string, settings: string): string[] {
+  let hdr = Header;
+  hdr.push(...note.split("\n"));
+  hdr.push("AIRAC: " + airac);
+  hdr.push("Produced by asselect.uk: " + new Date().toISOString());
+  hdr.push("Commit: " + commit);
+  hdr.push(...wrap(settings).split("\n").map(x => "  " + x));
+
+  return Header.map(x => (x === "") ? "*" : "* " + x);
 }
 
 // Convert lat/lon string to pair of floats

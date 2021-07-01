@@ -1,5 +1,5 @@
-import {formatCentre, formatDistance, formatLatLon,
-        formatLevel, getHeader, normLevel, parseLatLon} from './helpers';
+import {formatCentre, formatDistance, formatHeader, formatLatLon,
+        formatLevel, normLevel, parseLatLon} from './helpers';
 
 const AsciiUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -21,8 +21,9 @@ export function convert(yaixm: any, opts: any): string {
 
   // Remove wave boxes
   airspace = airspace.filter((feature: any) =>
-    !(opts.waves.includes(feature.name) && (feature.type === "D_OTHER"))
-  );
+    !(feature.type === "D_OTHER" &&
+      feature.localtype === "GLIDER" &&
+      !opts.waves.includes(feature.name)));
 
   // Merge frequencies
   if (opts.options.radioFreqs === 'append')
@@ -38,7 +39,10 @@ export function convert(yaixm: any, opts: any): string {
   const typer = makeTypeFunction(opts);
 
   // Create the output data
-  let lines: string[] = getHeader();
+  let lines: string[] = formatHeader(yaixm.release.note,
+                                     yaixm.release.airac_date.substr(0, 10),
+                                     yaixm.release.commit,
+                                     JSON.stringify(opts));
 
   airspace.forEach( (feature: any) => {
     feature.geometry.forEach( (volume: any) => {
