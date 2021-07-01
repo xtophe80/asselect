@@ -39,9 +39,8 @@ export class OptionEditorComponent implements OnInit {
   ];
 
   format = [
-    { id: 'openair', 'name': 'OpenAir (recommended)' },
-    { id: 'tnp', 'name': 'TNP'  },
-    { id: 'ratonly', 'name': 'OpenAir, RA(T) only' },
+    { id: 'openair', 'name': 'OpenAir' },
+    { id: 'ratonly', 'name': 'RA(T) only' },
     { id: 'competition', 'name': 'Competition' }
   ];
 
