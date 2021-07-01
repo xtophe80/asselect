@@ -1,9 +1,30 @@
+export const Header = [
+  " UK Airspace",
+  " Alan Sparrow (airspace@asselect.uk)",
+  "",
+  " I have tried to make this data as accurate as possible, however",
+  " there will still be errors. Good airmanship is your responsibility,",
+  " not mine - Don't blame me if you go somewhere you shouldn't have",
+  " gone while using this data.",
+  "",
+  " To the extent possible under law, Alan Sparrow has waived all",
+  " copyright and related or neighbouring rights to this file. The data",
+  " in this file is based on the work of others including: George Knight,",
+  " Geoff Brown, Peter Desmond and Rory O'Connor.  The data is originally",
+  " sourced from the UK Aeronautical Information Package (AIP)."
+];
+
 // Latitude/longitude regex, pattern is: [D]DDMMSS[.s[s[s]]]H
 const DmsRe = new RegExp(
   "([0-9]{2}|[01][0-9]{2})" +
   "([0-5][0-9])" +
   "([0-5][0-9](?:\.[0-9]{1,3})?)" +
-  "([NESW])");
+  "([NESW])"
+);
+
+export function getHeader(): string[] {
+  return Header.map(x => "*" + x);
+}
 
 // Convert lat/lon string to pair of floats
 export function parseLatLon(latlonStr: string): number[] {

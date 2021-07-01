@@ -1,5 +1,5 @@
 import {formatCentre, formatDistance, formatLatLon,
-        formatLevel, normLevel, parseLatLon} from './helpers';
+        formatLevel, getHeader, normLevel, parseLatLon} from './helpers';
 
 const AsciiUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -38,7 +38,8 @@ export function convert(yaixm: any, opts: any): string {
   const typer = makeTypeFunction(opts);
 
   // Create the output data
-  let lines: string[] = [];
+  let lines: string[] = getHeader();
+
   airspace.forEach( (feature: any) => {
     feature.geometry.forEach( (volume: any) => {
       if (airfilter(feature, volume)) {
