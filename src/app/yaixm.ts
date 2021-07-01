@@ -16,7 +16,7 @@ export function convert(yaixm: any, opts: any): string {
   let loas = JSON.parse(JSON.stringify(yaixm.loa));
 
   // Merge LOAs
-  loas = loas.filter((loa: any) => opts.loas.includes(loa.name));
+  loas = loas.filter((loa: any) => opts.loas.includes(loa.name) || loa.default);
   mergeLoas(airspace, loas);
 
   // Append RATs
