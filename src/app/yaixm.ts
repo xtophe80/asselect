@@ -400,7 +400,7 @@ function doBoundary(boundary: any[]): string[] {
   if (segtype(boundary[0]) !== 'circle') {
     const [last] = boundary.slice(-1);
     if (segtype(last) === 'line') {
-      out.push(...doPoint(boundary[0].line[0]));
+      out.push(doPoint(boundary[0].line[0]));
     }
     else if (segtype(last) === 'arc') {
       if (boundary[0].line[0] !== last.arc.to)
@@ -437,7 +437,7 @@ function centre(latlon: string): string {
 
 function formatDistance(distance: string): string {
   let [dist, unit] = distance.split(" ");
-  if (unit = "km")
+  if (unit === "km")
     dist = (parseFloat(distance) / 1.852).toFixed(3);
 
   return dist;
