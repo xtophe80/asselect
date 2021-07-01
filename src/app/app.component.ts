@@ -65,10 +65,10 @@ export class AppComponent implements OnInit {
       this.yaixm = yaixm;
 
       // Set AIRAC date
-      this.airac = yaixm['release']['airac_date'].substr(0, 10);
+      this.airac = yaixm.release.airac_date.substr(0, 10);
 
       // Get RATs
-      this.ratNames = yaixm['rat'].map((x: any) => x['name']);
+      this.ratNames = yaixm.rat.map((x: any) => x.name);
 
       this.ratFormArray.clear();
       for (let i = 0; i < this.ratNames.length; i++) {
@@ -76,9 +76,9 @@ export class AppComponent implements OnInit {
       }
 
       // Get LOAs
-      this.loaNames = yaixm['loa']
-        .filter((x: any) => x['default'] !== true)
-        .map((x: any) => x['name']);
+      this.loaNames = yaixm.loa
+        .filter((x: any) => x.default !== true)
+        .map((x: any) => x.name);
 
       this.loaFormArray.clear();
       for (let i = 0; i < this.loaNames.length; i++) {
@@ -88,9 +88,9 @@ export class AppComponent implements OnInit {
       // Get Wave boxes
       this.waveNames = []
       this.waveFormArray.clear();
-      for (let a of yaixm['airspace']) {
-        if (a['type'] === 'D_OTHER' && a['localtype'] === 'GLIDER') {
-          this.waveNames.push(a['name']);
+      for (let a of yaixm.airspace) {
+        if (a.type === 'D_OTHER' && a.localtype === 'GLIDER') {
+          this.waveNames.push(a.name);
           this.waveFormArray.push(new FormControl(false));
         }
       }
