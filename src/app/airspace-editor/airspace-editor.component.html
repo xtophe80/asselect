@@ -1,66 +1,66 @@
 <ng-container [formGroup]="airspaceForm">
-  <div id="airspace-form" formGroupName="airspace">
+  <div id="airspace-edit" formGroupName="airspace">
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>ATZ:</mat-label>
-        <select matNativeControl formControlName="atz">
-          <option *ngFor="let x of atz" [ngValue]="x.id">{{x.name}}</option>
-        </select>
+        <mat-select formControlName="atz">
+          <mat-option *ngFor="let x of atz" [value]="x.id">{{x.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>ILS Feather:</mat-label>
-        <select matNativeControl formControlName="ils">
-          <option *ngFor="let x of ils" [ngValue]="x.id">{{x.name}}</option>
-        </select>
+        <mat-select formControlName="ils">
+          <mat-option *ngFor="let x of ils" [value]="x.id">{{x.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
 
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>Unlicensed A/F:</mat-label>
-        <select matNativeControl formControlName="unlicensedAirfield">
-          <option *ngFor="let x of unlicensedAirfield" [ngValue]="x.id">{{x.name}}</option>
-        </select>
+        <mat-select formControlName="unlicensedAirfield">
+          <mat-option *ngFor="let x of unlicensedAirfield" [value]="x.id">{{x.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>Microlight A/F:</mat-label>
-        <select matNativeControl formControlName="microlightAirfield">
-          <option *ngFor="let x of microlightAirfield" [ngValue]="x.id">{{x.name}}</option>
-        </select>
+        <mat-select formControlName="microlightAirfield">
+          <mat-option *ngFor="let x of microlightAirfield" [value]="x.id">{{x.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
 
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>Gliding A/F:</mat-label>
-        <select matNativeControl formControlName="glidingAirfield">
-          <option *ngFor="let x of glidingAirfield" [ngValue]="x.id">{{x.name}}</option>
-        </select>
+        <mat-select formControlName="glidingAirfield">
+          <mat-option *ngFor="let x of glidingAirfield" [value]="x.id">{{x.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>Exclude Home A/F:</mat-label>
-        <select matNativeControl formControlName="homeAirfield">
-          <option *ngFor="let x of glidingSites" [ngValue]="x">{{x}}</option>
-        </select>
+        <mat-select formControlName="homeAirfield">
+          <mat-option *ngFor="let x of glidingSites" [value]="x">{{x}}</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
 
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>HIRTA/GVS:</mat-label>
-        <select matNativeControl formControlName="hirtaGvs">
-          <option *ngFor="let x of hirtaGvs" [ngValue]="x.id">{{x.name}}</option>
-        </select>
+        <mat-select formControlName="hirtaGvs">
+          <mat-option *ngFor="let x of hirtaGvs" [value]="x.id">{{x.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>Obstacle:</mat-label>
-        <select matNativeControl formControlName="obstacle">
-          <option *ngFor="let x of obstacle" [ngValue]="x.id">{{x.name}}</option>
-        </select>
+        <mat-select formControlName="obstacle">
+          <mat-option *ngFor="let x of obstacle" [value]="x.id">{{x.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
   </div>

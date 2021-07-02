@@ -5,41 +5,41 @@
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>Max Level:</mat-label>
-        <select matNativeControl formControlName="maxLevel">
-          <option *ngFor="let x of maxLevels" [ngValue]="x.id">{{x.name}}</option>
-        </select>
+        <mat-select formControlName="maxLevel">
+          <mat-option *ngFor="let x of maxLevels" [value]="x.id">{{x.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>Radio Frequencies:</mat-label>
-        <select matNativeControl formControlName="radioFreqs">
-          <option *ngFor="let x of radioFreqs" [ngValue]="x.id">{{x.name}}</option>
-        </select>
+        <mat-select formControlName="radioFreqs">
+          <mat-option *ngFor="let x of radioFreqs" [value]="x.id">{{x.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
 
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>Omit North of:</mat-label>
-        <select matNativeControl formControlName="north">
-          <option *ngFor="let x of norths" [ngValue]="x.id">{{x.name}}</option>
-        </select>
+        <mat-select formControlName="north">
+          <mat-option *ngFor="let x of norths" [value]="x.id">{{x.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>Omit South of:</mat-label>
-        <select matNativeControl formControlName="south">
-          <option *ngFor="let x of souths" [ngValue]="x.id">{{x.name}}</option>
-        </select>
+        <mat-select formControlName="south">
+          <mat-option *ngFor="let x of souths" [value]="x.id">{{x.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
 
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
         <mat-label>Format:</mat-label>
-        <select matNativeControl formControlName="format">
-          <option *ngFor="let x of format" [ngValue]="x.id">{{x.name}}</option>
-        </select>
+        <mat-select formControlName="format">
+          <mat-option *ngFor="let x of format" [value]="x.id">{{x.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
   </div>
