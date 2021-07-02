@@ -5,29 +5,61 @@ const AsciiUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 const NM_TO_DEGREES = 1 / 60;
 
+const ObstacleTypes = new Map([
+  ['BLDG', "BUILDING"],
+  ['BRDG', "BRIDGE"],
+  ['CHIM', "CHIMNEY"],
+  ['COOL', "COOLING TOWER"],
+  ['CRN', "CRANE"],
+  ['FLR', "GAS FLARE"],
+  ['MET', "MET MAST"],
+  ['MINE', "MINE"],
+  ['MISC', "OBSTACLE"],
+  ['MONT', "MONUMENT"],
+  ['OBST', "OBSTACLE"],
+  ['OIL', "OIL REFINERY"],
+  ['PLT', "BUILDING"],
+  ['POW', "CHURCH"],
+  ['PYL', "PYLON"],
+  ['RTM', "RADIO MAST"],
+  ['TURB-ON', "WIND TURBINE"],
+  ['WASTE', "WASTE PIPE"]
+]);
+
 // Returns the airspace file
 export function convert(yaixm: any, opts: any): string {
-  // Deep copy airspace and LOAs
-  let airspace = JSON.parse(JSON.stringify(yaixm.airspace));
-  let loas = JSON.parse(JSON.stringify(yaixm.loa));
+  var airspace: any;
 
-  // Merge LOAs
-  loas = loas.filter((loa: any) => opts.loas.includes(loa.name) || loa.default);
-  mergeLoas(airspace, loas);
+  if (opts.options.format === 'ratonly') {
+    airspace = yaixm.rat.filter((rat: any) => opts.rats.includes(rat.name));
+  }
+  else {
+    // Deep copy airspace and LOAs
+    airspace = JSON.parse(JSON.stringify(yaixm.airspace));
+    let loas = JSON.parse(JSON.stringify(yaixm.loa));
 
-  // Append RATs
-  airspace = airspace.concat(
-    yaixm.rat.filter((rat: any) => opts.rats.includes(rat.name)));
+    // Merge LOAs
+    loas = loas.filter((loa: any) => opts.loas.includes(loa.name) || loa.default);
+    mergeLoas(airspace, loas);
 
-  // Remove wave boxes
-  airspace = airspace.filter((feature: any) =>
-    !(feature.type === "D_OTHER" &&
-      feature.localtype === "GLIDER" &&
-      !opts.waves.includes(feature.name)));
+    // Add obstacles
+    if (opts.airspace.obstacle === 'include')
+      airspace.push(...obstacles(yaixm.obstacle));
 
-  // Merge frequencies
-  if (opts.options.radioFreqs === 'append')
-    mergeServices(airspace, yaixm.service);
+    // Append RATs
+    airspace.push(
+      ...yaixm.rat.filter((rat: any) => opts.rats.includes(rat.name)));
+
+    // Remove wave boxes
+    airspace = airspace.filter((feature: any) =>
+      !(feature.type === "D_OTHER" &&
+        feature.localtype === "GLIDER" &&
+        !opts.waves.includes(feature.name)));
+
+    // Merge frequencies
+    if (opts.options.radioFreqs === 'append')
+      mergeServices(airspace, yaixm.service);
+  }
 
   // Airspace filter function
   let airfilter = makeAirfilter(opts);
@@ -439,4 +471,34 @@ function minMaxLat(volume: any): number[] {
 
 function segtype(segment: any): string {
   return Object.keys(segment)[0];
+}
+
+// Create "dummy" airspace for obstacles
+function obstacles(obstacles: any): any[] {
+  var out: any[] = [];
+
+  for (let obstacle of obstacles) {
+    const name = obstacle.name || ObstacleTypes.get(obstacle.type) || "OBSTACLE";
+
+    let volume = {
+      upper: obstacle['elevation'],
+      lower: "SFC",
+      boundary: [{
+        circle: {
+          centre: obstacle.position,
+          radius: "0.5 nm"
+        }
+      }]
+    };
+
+    let feature = {
+      name: name,
+      type: "OTHER",
+      geometry: [volume]
+    };
+
+    out.push(feature);
+  };
+
+  return out;
 }
