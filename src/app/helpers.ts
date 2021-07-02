@@ -29,14 +29,15 @@ const wrap = (s: string) => s.replace(
 
 export function formatHeader(note: string, airac: string,
                              commit: string, settings: string): string[] {
-  let hdr = Header;
+  let hdr: string[] = [];
+  hdr.push(...Header);
   hdr.push(...note.split("\n"));
   hdr.push("AIRAC: " + airac);
   hdr.push("Produced by asselect.uk: " + new Date().toISOString());
   hdr.push("Commit: " + commit);
   hdr.push(...wrap(settings).split("\n"));
 
-  return Header.map(x => (x === "") ? "*" : "* " + x);
+  return hdr.map(x => (x === "") ? "*" : "* " + x);
 }
 
 // Convert lat/lon string to pair of floats
