@@ -29,7 +29,7 @@ const wrap = (s: string) => s.replace(
 
 export function formatHeader(note: string, airac: string,
                              commit: string, settings: string): string[] {
-  let hdr: string[] = [];
+  const hdr: string[] = [];
   hdr.push(...Header);
   hdr.push(...note.split("\n"));
   hdr.push("AIRAC: " + airac);
@@ -59,11 +59,15 @@ export function formatLatLon(latlon: string): string {
 
 // Format distance for OpenAir
 export function formatDistance(distance: string): string {
-  let [dist, unit] = distance.split(" ");
-  if (unit === "km")
-    dist = (parseFloat(distance) / 1.852).toFixed(3);
+  const [dist, unit] = distance.split(" ");
 
-  return dist;
+  let out: string;
+  if (unit === "km")
+    out = (parseFloat(distance) / 1.852).toFixed(3);
+  else
+    out = dist;
+
+  return out;
 }
 
 // Format level for OpenAir
@@ -116,7 +120,7 @@ function pad(val: number, len: number) {
 function dms(deg: number):
   {d: number, m: number, s: number, ns: string, ew: string} {
 
-  let ns: string;;
+  let ns: string;
   let ew: string;
   let min: number;
   let sec:number;

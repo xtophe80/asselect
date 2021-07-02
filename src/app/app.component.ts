@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 
 import { PromptUpdateService } from './prompt-update.service';
 
@@ -13,7 +13,7 @@ import { convert } from './yaixm';
 })
 export class AppComponent implements OnInit {
 
-  yaixm: any = {};
+  yaixm = {};
 
   airac = "";
 
@@ -56,11 +56,11 @@ export class AppComponent implements OnInit {
               private yaixmService: YaixmService,
               private fb: FormBuilder) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getYaixm();
   }
 
-  getYaixm() {
+  getYaixm(): void {
     this.yaixmService.getYaixm().subscribe(yaixm => {
       this.yaixm = yaixm;
 
@@ -88,7 +88,7 @@ export class AppComponent implements OnInit {
       // Get Wave boxes
       this.waveNames = [];
       this.waveFormArray.clear();
-      for (let a of yaixm.airspace) {
+      for (const a of yaixm.airspace) {
         if (a.type === 'D_OTHER' && a.localtype === 'GLIDER') {
           this.waveNames.push(a.name);
           this.waveFormArray.push(new FormControl(false));
@@ -97,32 +97,32 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    let airspace = this.formGroup.get('airspace')?.value;
+  onSubmit(): void {
+    const airspace = this.formGroup.get('airspace')?.value;
     localStorage.setItem('airspace', JSON.stringify(airspace));
 
-    let options = this.formGroup.get('options')?.value;
+    const options = this.formGroup.get('options')?.value;
     localStorage.setItem('options', JSON.stringify(options));
 
-    let rats = this.ratNames.filter((e, i) => this.ratFormArray.at(i).value);
+    const rats = this.ratNames.filter((e, i) => this.ratFormArray.at(i).value);
     localStorage.setItem('rat', JSON.stringify(rats));
 
-    let loas = this.loaNames.filter((e, i) => this.loaFormArray.at(i).value);
+    const loas = this.loaNames.filter((e, i) => this.loaFormArray.at(i).value);
     localStorage.setItem('loa', JSON.stringify(loas));
 
-    let waves = this.waveNames.filter((e, i) => this.waveFormArray.at(i).value);
+    const waves = this.waveNames.filter((e, i) => this.waveFormArray.at(i).value);
     localStorage.setItem('wave', JSON.stringify(waves));
 
-    let opts = {
+    const opts = {
       'airspace': airspace,
       'options': options,
       'rats': rats,
       'loas': loas,
       'waves': waves
     };
-    let txt = convert(this.yaixm, opts);
+    const txt = convert(this.yaixm, opts);
 
-    let blob = new Blob([txt], { type: "text/plain;charset=utf-8" });
+    const blob = new Blob([txt], { type: "text/plain;charset=utf-8" });
     saveAs(blob, "openair.txt");
   }
 }

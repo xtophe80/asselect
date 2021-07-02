@@ -27,8 +27,9 @@ const ObstacleTypes = new Map([
 ]);
 
 // Returns the airspace file
+/* eslint @typescript-eslint/explicit-module-boundary-types: "off" */
 export function convert(yaixm: any, opts: any): string {
-  var airspace: any;
+  let airspace: any;
 
   if (opts.options.format === 'ratonly') {
     airspace = yaixm.rat.filter((rat: any) => opts.rats.includes(rat.name));
@@ -62,7 +63,7 @@ export function convert(yaixm: any, opts: any): string {
   }
 
   // Airspace filter function
-  let airfilter = makeAirfilter(opts);
+  const airfilter = makeAirfilter(opts);
 
   // Airspace name function
   const namer = makeNameFuction(opts);
@@ -71,7 +72,7 @@ export function convert(yaixm: any, opts: any): string {
   const typer = makeTypeFunction(opts);
 
   // Create the output data
-  let lines: string[] = formatHeader(yaixm.release.note,
+  const lines: string[] = formatHeader(yaixm.release.note,
                                      yaixm.release.airac_date.substr(0, 10),
                                      yaixm.release.commit,
                                      JSON.stringify(opts).replace(/"/g, ''));
@@ -275,15 +276,15 @@ function makeNameFuction(opts: any) {
 
 // Merge LOAs into airspace
 function mergeLoas(airspace: any, loas: any) {
-  let replacementVolumes = [];
+  const replacementVolumes = [];
 
   // Add new features
-  for (let loa of loas) {
-    for (let area of loa.areas) {
+  for (const loa of loas) {
+    for (const area of loa.areas) {
 
       // Add LOA rule
-      for (let feature of area.add) {
-        let rules = (feature.rules || []);
+      for (const feature of area.add) {
+        const rules = (feature.rules || []);
         rules.push("LOA");
         feature.rules = rules;
       }
@@ -297,7 +298,7 @@ function mergeLoas(airspace: any, loas: any) {
   }
 
   // Replace volumes
-  for (let replace of replacementVolumes) {
+  for (const replace of replacementVolumes) {
     if (replace.geometry.length === 0)
       continue;
 
@@ -332,7 +333,7 @@ function mergeLoas(airspace: any, loas: any) {
 // Merge radio frequencies into airspace
 function mergeServices(airspace: any, services: any) {
   // Create frequency map
-  let freqs = new Map();
+  const freqs = new Map();
   for (const service of services) {
     for (const id of service.controls) {
       freqs.set(id, service.frequency);
@@ -340,9 +341,9 @@ function mergeServices(airspace: any, services: any) {
   }
 
   // Add frequency properties
-  for (let feature of airspace) {
-    for (let volume of feature.geometry) {
-      let freq = freqs.get(volume.id) || freqs.get(feature.id);
+  for (const feature of airspace) {
+    for (const volume of feature.geometry) {
+      const freq = freqs.get(volume.id) || freqs.get(feature.id);
       if (freq)
         volume.frequency = freq;
     }
@@ -351,8 +352,8 @@ function mergeServices(airspace: any, services: any) {
 
 // Find volume for LOA merge
 function findVolume(airspace: any[], vid: string): any[] {
-  for (let feature of airspace) {
-    for (let volume of feature['geometry']) {
+  for (const feature of airspace) {
+    for (const volume of feature['geometry']) {
       if (volume.id === vid) {
         return [volume, feature];
       }
@@ -365,7 +366,7 @@ function findVolume(airspace: any[], vid: string): any[] {
 function doVolume(feature: any, volume: any,
                   namer: (f: any, v: any)=>string,
                   typer: (f: any, v: any)=>string): string[] {
-  let out = ["*"];
+  const out = ["*"];
   out.push(...doType(feature, volume, typer));
   out.push(...doName(feature, volume, namer));
   out.push(...doLevels(volume));
@@ -392,8 +393,8 @@ function doLevels(volume: any): string[] {
 function doBoundary(boundary: any[]): string[] {
   let point = "";
 
-  let out = [];
-  for (let segment of boundary) {
+  const out = [];
+  for (const segment of boundary) {
 
     if (segtype(segment) === 'circle') {
       out.push(...doCircle(segment.circle));
@@ -424,8 +425,8 @@ function doBoundary(boundary: any[]): string[] {
 }
 
 function doLine(line: string[]): string[] {
-  let out: string[] = [];
-  for (let point of line)
+  const out: string[] = [];
+  for (const point of line)
     out.push(doPoint(point));
 
   return out;
@@ -450,11 +451,11 @@ function doPoint(point: string): string {
 
 // Get (approximate) minimum and maximum latitude for volume
 function minMaxLat(volume: any): number[] {
-  let latArr = [];
+  const latArr = [];
   for (const bdry of volume.boundary) {
     if (bdry.circle) {
       const radius = parseFloat(bdry.circle.radius.split(" ")[0]);
-      const [clat, clon] = parseLatLon(bdry.circle.centre);
+      const [clat] = parseLatLon(bdry.circle.centre);
       latArr.push(clat + radius * NM_TO_DEGREES);
       latArr.push(clat - radius * NM_TO_DEGREES);
     }
@@ -475,12 +476,12 @@ function segtype(segment: any): string {
 
 // Create "dummy" airspace for obstacles
 function obstacles(obstacles: any): any[] {
-  var out: any[] = [];
+  const out: any[] = [];
 
-  for (let obstacle of obstacles) {
+  for (const obstacle of obstacles) {
     const name = obstacle.name || ObstacleTypes.get(obstacle.type) || "OBSTACLE";
 
-    let volume = {
+    const volume = {
       upper: obstacle['elevation'],
       lower: "SFC",
       boundary: [{
@@ -491,14 +492,14 @@ function obstacles(obstacles: any): any[] {
       }]
     };
 
-    let feature = {
+    const feature = {
       name: name,
       type: "OTHER",
       geometry: [volume]
     };
 
     out.push(feature);
-  };
+  }
 
   return out;
 }

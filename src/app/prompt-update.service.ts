@@ -8,7 +8,7 @@ export class PromptUpdateService {
 
   constructor(updates: SwUpdate) {
 
-    updates.available.subscribe(event => {
+    updates.available.subscribe(() => {
       console.log('Update available');
 
       updates.activateUpdate().then(() => document.location.reload());

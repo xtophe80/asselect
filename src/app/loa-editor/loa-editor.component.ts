@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
@@ -11,19 +11,17 @@ export class LoaEditorComponent implements OnChanges {
   @Input() airspaceForm: FormGroup = new FormGroup({});
   @Input() names: string[] = [];
 
-  constructor() {}
-
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(): void {
     // Get stored values
-    let value = localStorage.getItem('loa');
+    const value = localStorage.getItem('loa');
     if (typeof(value) === 'string') {
 
       // Get array of LOAs
-      let loas = JSON.parse(value);
-      let loaArray = this.airspaceForm.get('loa') as FormArray;
+      const loas = JSON.parse(value);
+      const loaArray = this.airspaceForm.get('loa') as FormArray;
 
       loas.forEach((loa: string) => {
-        let i = this.names.indexOf(loa);
+        const i = this.names.indexOf(loa);
         if (i !== -1) {
           loaArray.at(i).setValue(true);
         }
@@ -31,8 +29,8 @@ export class LoaEditorComponent implements OnChanges {
     }
   }
 
-  clearall() {
-    let loaArray = this.airspaceForm.get('loa') as FormArray;
+  clearall(): void {
+    const loaArray = this.airspaceForm.get('loa') as FormArray;
     loaArray.reset();
   }
 }

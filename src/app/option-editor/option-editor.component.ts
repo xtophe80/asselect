@@ -44,15 +44,13 @@ export class OptionEditorComponent implements OnInit {
     { id: 'competition', 'name': 'Competition' }
   ];
 
-  constructor() {}
-
-  ngOnInit() {
-    let value = localStorage.getItem('options');
+  ngOnInit(): void {
+    const value = localStorage.getItem('options');
     if (typeof(value) === 'string') {
-      let settings = JSON.parse(value);
+      const settings = JSON.parse(value);
 
-      let optGroup = this.airspaceForm.get('options') as FormGroup;
-      for (let control in optGroup.controls) {
+      const optGroup = this.airspaceForm.get('options') as FormGroup;
+      for (const control in optGroup.controls) {
         optGroup.get(control)?.setValue(settings[control]);
       }
     }

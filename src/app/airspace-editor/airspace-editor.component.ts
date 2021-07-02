@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -53,21 +53,19 @@ export class AirspaceEditorComponent implements OnInit, OnChanges {
 
   glidingSites: string[] = ['None'];
 
-  constructor() {}
-
-  ngOnInit() {
-    let value = localStorage.getItem('airspace');
+  ngOnInit(): void {
+    const value = localStorage.getItem('airspace');
     if (typeof(value) === 'string') {
-      let settings = JSON.parse(value);
+      const settings = JSON.parse(value);
 
-      let asGroup = this.airspaceForm.get('airspace') as FormGroup;
-      for (let control in asGroup.controls) {
+      const asGroup = this.airspaceForm.get('airspace') as FormGroup;
+      for (const control in asGroup.controls) {
         asGroup.get(control)?.setValue(settings[control]);
       }
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(): void {
     if (this.yaixm.airspace !== undefined) {
       this.glidingSites = this.yaixm.airspace
         .filter((x: any) =>

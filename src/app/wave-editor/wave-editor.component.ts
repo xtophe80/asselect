@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
@@ -11,19 +11,17 @@ export class WaveEditorComponent implements OnChanges {
   @Input() airspaceForm: FormGroup = new FormGroup({});
   @Input() names: string[] = [];
 
-  constructor() {}
-
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(): void {
     // Get stored values
-    let value = localStorage.getItem('wave');
+    const value = localStorage.getItem('wave');
     if (typeof(value) === 'string') {
 
       // Get array of Wave boxes
-      let waves = JSON.parse(value);
-      let waveArray = this.airspaceForm.get('wave') as FormArray;
+      const waves = JSON.parse(value);
+      const waveArray = this.airspaceForm.get('wave') as FormArray;
 
       waves.forEach((wave: string) => {
-        let i = this.names.indexOf(wave);
+        const i = this.names.indexOf(wave);
         if (i !== -1) {
           waveArray.at(i).setValue(true);
         }
@@ -31,8 +29,8 @@ export class WaveEditorComponent implements OnChanges {
     }
   }
 
-  clearall() {
-    let waveArray = this.airspaceForm.get('wave') as FormArray;
+  clearall(): void {
+    const waveArray = this.airspaceForm.get('wave') as FormArray;
     waveArray.reset();
   }
 }

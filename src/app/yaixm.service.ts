@@ -9,7 +9,7 @@ export class YaixmService {
 
   constructor(private http: HttpClient) { }
 
-  getYaixm() {
+  getYaixm(): Observable<any> {
     return this.http.get<any>('assets/yaixm.json');
   }
 }
