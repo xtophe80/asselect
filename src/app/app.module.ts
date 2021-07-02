@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -47,6 +48,7 @@ import { AboutComponent } from './about/about.component';
     MatInputModule,
     MatTabsModule,
     MatCheckboxModule,
+    MatToolbarModule,
     FlexLayoutModule,
     FileSaverModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
