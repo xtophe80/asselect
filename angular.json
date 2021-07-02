@@ -110,9 +110,21 @@
           "options": {
             "cname": "foobar.asselect.uk"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "asselect"
+  "defaultProject": "asselect",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
