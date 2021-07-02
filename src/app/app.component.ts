@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import { PromptUpdateService } from './prompt-update.service'
+import { PromptUpdateService } from './prompt-update.service';
 
 import { YaixmService } from './yaixm.service';
 import { convert } from './yaixm';
@@ -86,7 +86,7 @@ export class AppComponent implements OnInit {
       }
 
       // Get Wave boxes
-      this.waveNames = []
+      this.waveNames = [];
       this.waveFormArray.clear();
       for (let a of yaixm.airspace) {
         if (a.type === 'D_OTHER' && a.localtype === 'GLIDER') {
@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
           this.waveFormArray.push(new FormControl(false));
         }
       }
-    })
+    });
   }
 
   onSubmit() {

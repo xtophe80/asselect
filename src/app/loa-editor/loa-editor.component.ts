@@ -27,7 +27,7 @@ export class LoaEditorComponent implements OnChanges {
         if (i !== -1) {
           loaArray.at(i).setValue(true);
         }
-      })
+      });
     }
   }
 

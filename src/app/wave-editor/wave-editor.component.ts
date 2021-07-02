@@ -27,7 +27,7 @@ export class WaveEditorComponent implements OnChanges {
         if (i !== -1) {
           waveArray.at(i).setValue(true);
         }
-      })
+      });
     }
   }
 

@@ -95,12 +95,12 @@ function parseDeg(degStr: string): number {
 
   let deg = 0;
   if (m !== null) {
-    deg = parseInt(m[1]) + parseInt(m[2]) / 60 + parseFloat(m[3]) / 3600
+    deg = parseInt(m[1]) + parseInt(m[2]) / 60 + parseFloat(m[3]) / 3600;
     if ("SW".includes(m[4]))
-      deg = -deg
+      deg = -deg;
   }
 
-  return deg
+  return deg;
 }
 
 // Pad with leading zeroes
@@ -131,7 +131,7 @@ function dms(deg: number):
     ew = "E";
   }
 
-  sec = Math.round(deg * 3600)
+  sec = Math.round(deg * 3600);
 
   min = Math.floor(sec / 60);
   sec = sec % 60;

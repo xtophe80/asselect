@@ -219,7 +219,7 @@ function makeTypeFunction(opts: any) {
     else if (rules.includes("TMZ"))
       out = "TMZ";
     else if (rules.includes("RMZ"))
-      out = "RMZ"
+      out = "RMZ";
     else
       out = volume.class || feature.class || "OTHER";
 
@@ -240,7 +240,7 @@ function makeNameFuction(opts: any) {
 
       // Base type name
       if (["NOATZ", "UL"].includes(feature.localtype)) {
-        name += " A/F"
+        name += " A/F";
       } else if (["MATZ", "DZ", "GVS", "HIRTA", "ILS", "LASER"].includes(feature.localtype)) {
         name += " " + feature.localtype;
       } else if (feature.type === "ATZ") {
@@ -253,21 +253,21 @@ function makeNameFuction(opts: any) {
       if (addSeqno && feature.geometry.length > 1) {
         const seqno = volume.seqno ||
                 String.fromCharCode("A".charCodeAt(0) +
-                                    feature.geometry.indexOf(volume))
+                                    feature.geometry.indexOf(volume));
         name += `-${seqno}`;
       }
 
       // SI & NOTAM qualifiers
-      const qualifiers = rules.filter((x: any) => ["SI", "NOTAM"].includes(x))
+      const qualifiers = rules.filter((x: any) => ["SI", "NOTAM"].includes(x));
       if (qualifiers.length > 0) {
         name += ` (${qualifiers.sort().reverse().join("/")})`;
       }
 
       if (volume.frequency) {
-        name += ` ${volume.frequency.toFixed(3)}`
+        name += ` ${volume.frequency.toFixed(3)}`;
       }
     }
-    return name
+    return name;
   }
 
   return airspaceNamer;
@@ -400,7 +400,7 @@ function doBoundary(boundary: any[]): string[] {
     }
     else if (segtype(segment) === 'line') {
       out.push(...doLine(segment.line));
-      [point] = segment.line.slice(-1)
+      [point] = segment.line.slice(-1);
     }
     else if (segtype(segment) === 'arc') {
       out.push(...doArc(segment.arc, point));
@@ -445,7 +445,7 @@ function doArc(arc: any, from: string): string[] {
 
 // Airspace boundary point
 function doPoint(point: string): string {
-  return "DP " + formatLatLon(point)
+  return "DP " + formatLatLon(point);
 }
 
 // Get (approximate) minimum and maximum latitude for volume

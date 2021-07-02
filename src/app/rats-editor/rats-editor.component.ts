@@ -27,7 +27,7 @@ export class RatsEditorComponent implements OnChanges {
         if (i !== -1) {
           ratArray.at(i).setValue(true);
         }
-      })
+      });
     }
   }
 
