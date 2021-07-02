@@ -4,7 +4,7 @@
 
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
-        <mat-label>Max Level:</mat-label>
+        <mat-label>Maximum Level:</mat-label>
         <mat-select formControlName="maxLevel">
           <mat-option *ngFor="let x of maxLevels" [value]="x.id">{{x.name}}</mat-option>
         </mat-select>

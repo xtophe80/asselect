@@ -18,14 +18,14 @@
 
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
-        <mat-label>Unlicensed A/F:</mat-label>
+        <mat-label>Unlicensed Airfield:</mat-label>
         <mat-select formControlName="unlicensedAirfield">
           <mat-option *ngFor="let x of unlicensedAirfield" [value]="x.id">{{x.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
-        <mat-label>Microlight A/F:</mat-label>
+        <mat-label>Microlight Airfield:</mat-label>
         <mat-select formControlName="microlightAirfield">
           <mat-option *ngFor="let x of microlightAirfield" [value]="x.id">{{x.name}}</mat-option>
         </mat-select>
@@ -34,14 +34,14 @@
 
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
-        <mat-label>Gliding A/F:</mat-label>
+        <mat-label>Gliding Airfield:</mat-label>
         <mat-select formControlName="glidingAirfield">
           <mat-option *ngFor="let x of glidingAirfield" [value]="x.id">{{x.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
-        <mat-label>Exclude Home A/F:</mat-label>
+        <mat-label>Exclude Home Airfield:</mat-label>
         <mat-select formControlName="homeAirfield">
           <mat-option *ngFor="let x of glidingSites" [value]="x">{{x}}</mat-option>
         </mat-select>

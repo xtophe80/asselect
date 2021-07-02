@@ -1,35 +1,34 @@
 <div id="about" class="mat-typography">
   <h3>Airspace</h3>
-  <p>ASSelect provides airspace data for mainland UK in OpenAir format.</p>
-  <p><em>I have tried to make this data as accurate as possible, but
+  <p>ASSelect generates airspace data for mainland UK in OpenAir format.</p>
+  <p><em>I try to make this data as accurate as possible, but
   there will still be errors. Navigation is your responsibility,
   not mine. So don't blame me if you go somewhere you shouldn't have
   gone while using this data!</em></p>
   <h3>Output Format</h3>
-  <p>The output format is OpenAir. Competition format is intended for
-  competition organisers only.</p>
-  <p>RA(T)s can be download separately from the main airspace
-  by setting the Format to "OpenAir, RA(T) only". Your moving map can
-  then be updated without changing the main airspace file.</p>
+  <p>The output format is OpenAir.<p>
+  <p>The "OpenAir, RA(T) only" format downloads only the selected RATS.
+  This lets you update your moving map software without needing to change
+  the main airspace file.</p>
+  <p>Competition format is for competition organisers only.</p>
   <h3>Airspace Types</h3>
   <p><em>Unlicensed Airfields</em> are aerodromes (without an ATZ) listed
-  in section ENR&nbsp;5.5 of the AIP. The majority of smaller airfields
-  shown on the 1:500000 chart are not listed in the AIP and are not
-  included by this app.</p>
-  <p><em>Gliding Airfields</em> are listed in ENR&nbsp;5.5 and are
-  given a radius of 1&nbsp;nm by ASSelect. Your home site is
-  excluded if selected on the Opt tab.</p>
-  <p><em>Microlight Airfields</em> are listed in ENR&nbsp;5.5 and
-  are given a radius of 0.5&nbsp;nm by ASSelect.</p>
-  <p><em>Obstacles</em> are listed in ENR&nbsp;5.4. Only obstacles
-  with a height of greater than 600&nbsp;ft (mainly radio masts) are
+  in section ENR&nbsp;5.5 of the AIP. The AIP does not include the majority
+  of smaller airfields shown on the 1:500000 chart and so they are not
   included by ASSelect.</p>
+  <p><em>Gliding Airfields</em> are listed in ENR&nbsp;5.5. ASSelect plots
+  them with a radius of 1&nbsp;nm.  To avoid unnecessary airspace warnings
+  ASSelect can exclude your home site.</p>
+  <p><em>Microlight Airfields</em> are listed in ENR&nbsp;5.5 and
+  plotted with a radius of 0.5&nbsp;nm by ASSelect.</p>
+  <p><em>Obstacles</em> are listed in ENR&nbsp;5.4. ASSelect includes only
+  obstacles with a height of greater than 600&nbsp;ft (mainly radio masts).</p>
   <p><em>ATZs</em>. A radio call is required before entering an active
   ATZ. The BGA recommend setting them to Class&nbsp;D as a reminder.
-  However setting them as Control Zones will also generate an airspace
+  However setting them as Control Zones instead will also generate an airspace
   warning while distinguishing them from true Class&nbsp;D airspace.</p>
   <p><em>ILS Feathers</em> are not strictly an airspace type but the
-  BGA recommend a radio call if you are in the vicinity. It's also
+  BGA recommend a radio call if you fly in the vicinity. It's also
   recommended to set the airspace type to generate a warning on your
   moving map. Note the feather is symbolic only - the instrument
   approach procedure extends well outside the area of the feather.</p>
@@ -39,16 +38,12 @@
   With the exception of the Cambridge RAZ a local club briefing is
   required before using any local agreement.</p>
   <p><em>Cambridge RAZ</em>. The Cambridge Radio Advisory Zone (RAZ)
-  is not controlled airspace. Although it's not mandatory anyone flying
-  in the vicinity of Cambridge airport is encouraged to make contact
-  with Cambridge Approach before entering the RAZ. The RAZ is
+  is not controlled airspace. You are encouraged to make contact with
+  Cambridge Approach before entering the RAZ. Unlike other LOAs the RAZ is
   permanently enabled in ASSelect. Note - Openair doesn't support
-  a RAZ airspace type so a Radio Mandatory Zone (RMZ) type is used
-  as a substitute.</p>
-  <h3>Radio frequencies</h3>
-  <p>Radio frequencies can be appended to the airspace name. Some
-  frequencies may be missing - Please let me know if you spot something
-  wrong.</p>
+  a RAZ airspace type so a Radio Mandatory Zone (RMZ) type is substituted.</p>
+  <h3>Radio Frequencies</h3>
+  <p>ASSelect optionally appends radio frequencies to the airspace name.</p>
   <h3>Temporary Restrictions, RA(T)</h3>
   <p>RA(T)s are detailed in Mauve AICs on the
   <a class="text-primary" href="http://www.nats-uk.ead-it.com/public/index.php.html">NATS AIS website</a>.
@@ -57,9 +52,9 @@
   <h3>Data</h3>
   <p>Airspace data is updated every four weeks - see
   <a class="text-primary" href="http://www.nats-uk.ead-it.com/aip/current/misc/10_Year_AIRAC.pdf">Schedule</a>.
-  This site is normally updated approximately two weeks in advance of
+  I normally update this site approximately two weeks in advance of
   the effective date.<p>
-  <p>The airspace database can be downloaded from
+  <p>You can download the airspace database from
   <a class="text-primary" href="https://github.com/ahsparrow/airspace">GitHub</a>.</p>
   <h3>Contact</h3>
   <address>Comments, corrections and complaints to:
