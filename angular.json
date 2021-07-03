@@ -108,7 +108,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "cname": "foobar.asselect.uk"
+            "cname": "webapp.asselect.uk"
           }
         },
         "lint": {
