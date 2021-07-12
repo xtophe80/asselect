@@ -21,7 +21,7 @@ https://github.com/ahsparrow/navplot2 for details.
 
 ## Developing
 
-Install node.js from https://node.org and set PATH to include <install-dir>/bin
+Install node.js from https://node.org and add \<install-dir\>/bin to PATH.
 
 Install npm packages from the source code top level directory):
 
