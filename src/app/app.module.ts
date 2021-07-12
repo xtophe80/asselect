@@ -27,6 +27,7 @@ import { RatsEditorComponent } from './rats-editor/rats-editor.component';
 import { LoaEditorComponent } from './loa-editor/loa-editor.component';
 import { WaveEditorComponent } from './wave-editor/wave-editor.component';
 import { AboutComponent } from './about/about.component';
+import { NotamComponent } from './notam/notam.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AboutComponent } from './about/about.component';
     LoaEditorComponent,
     WaveEditorComponent,
     OptionEditorComponent,
-    AboutComponent
+    AboutComponent,
+    NotamComponent
   ],
   imports: [
     BrowserModule,
