@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ASSelect is deployed using GitHub pages:
 
-    ng deploy
+    npm run ng deploy
 
 deploy configuration (including domain name) is set in angular.json.
 
@@ -18,3 +18,15 @@ Update src/assets/yaixm.json, git commit and deploy as above.
 
 ASSelect retreives NOTAM data from MongoDB. See
 https://github.com/ahsparrow/navplot2 for details.
+
+## Build
+
+Install node.js from https://node.org and set PATH to include <install-dir>/bin
+
+Install npm packages:
+
+    npm install
+
+Run the application:
+
+    npm run ng serve
