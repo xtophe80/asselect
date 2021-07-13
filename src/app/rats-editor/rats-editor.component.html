@@ -1,17 +1,25 @@
-<ng-container [formGroup]="airspaceForm">
-  <div id="rat-edit" formArrayName="rat">
-    <div fxLayout="row" fxLayoutAlign="space-between">
-      <p class="mat-body-strong" fxFlex="initial">Temporary Restrictions, RA(T)</p>
-      <button fxFlex="initial" mat-button color="primary" type="button" (click)="clearall()">Clear</button>
-    </div>
+<mat-expansion-panel [expanded]="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title class="mat-body-strong">
+      Temporary Restrictions, RA(T)
+    </mat-panel-title>
+  </mat-expansion-panel-header>
 
-    <div fxLayout="row wrap" fxLayoutGap="5px grid" fxAlign="start">
-      <div fxFlex="33%" fxFlex.lt-sm="100%" fxFlex.lt-lg="50%" *ngFor="let name of names; index as i">
-        <mat-checkbox [formControlName]="i">
-          {{name}}
-        </mat-checkbox>
+  <ng-container [formGroup]="airspaceForm">
+    <div id="rat-edit" formArrayName="rat">
+      <div fxLayout="row wrap" fxLayoutGap="5px grid" fxAlign="start">
+        <div fxFlex="33%" fxFlex.lt-sm="100%" fxFlex.lt-lg="50%" *ngFor="let name of names; index as i">
+          <mat-checkbox [formControlName]="i">
+            {{name}}
+          </mat-checkbox>
+        </div>
       </div>
     </div>
+  </ng-container>
 
-  </div>
-</ng-container>
+  <mat-action-row>
+    <button mat-button color="primary" type="button" (click)="clearall()">
+      Clear
+    </button>
+  </mat-action-row>
+</mat-expansion-panel>

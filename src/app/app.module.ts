@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -51,6 +52,7 @@ import { NotamComponent } from './notam/notam.component';
     MatTabsModule,
     MatCheckboxModule,
     MatToolbarModule,
+    MatExpansionModule,
     FlexLayoutModule,
     FileSaverModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
