@@ -70,7 +70,8 @@ export class AirspaceEditorComponent implements OnInit, OnChanges {
       this.glidingSites = this.yaixm.airspace
         .filter((x: any) =>
                 x['localtype'] === 'GLIDER' && x['type'] === 'OTHER')
-        .map((x: any) => x['name']);
+        .map((x: any) => x['name'])
+        .sort();
       this.glidingSites.unshift('None');
     }
   }
