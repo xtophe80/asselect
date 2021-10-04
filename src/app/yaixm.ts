@@ -151,7 +151,7 @@ function makeTypeFunction(opts: any) {
   const ilsTypes = {atz: atz, classf: "F", classg: "G"};
   const ils = ilsTypes[opts.airspace.ils as keyof typeof ilsTypes];
 
-  const noatz = (opts.airspace.unlicenseAirfield === 'classf') ? "F" : "G";
+  const noatz = (opts.airspace.unlicensedAirfield === 'classf') ? "F" : "G";
 
   const ul = (opts.airspace.microlightAirfield === 'classf') ? "F" : "G";
 
