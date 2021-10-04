@@ -1,67 +1,75 @@
-<ng-container [formGroup]="airspaceForm">
-  <div id="airspace-edit" formGroupName="airspace">
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
-      <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
-        <mat-label>ATZ:</mat-label>
-        <mat-select formControlName="atz">
-          <mat-option *ngFor="let x of atz" [value]="x.id">{{x.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+<mat-expansion-panel [expanded]="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title class="mat-body-strong">
+      Airspace
+    </mat-panel-title>
+  </mat-expansion-panel-header>
 
-      <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
-        <mat-label>ILS Feather:</mat-label>
-        <mat-select formControlName="ils">
-          <mat-option *ngFor="let x of ils" [value]="x.id">{{x.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+  <ng-container [formGroup]="airspaceForm">
+    <div id="airspace-edit" formGroupName="airspace">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
+        <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
+          <mat-label>ATZ:</mat-label>
+          <mat-select formControlName="atz">
+            <mat-option *ngFor="let x of atz" [value]="x.id">{{x.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
+          <mat-label>ILS Feather:</mat-label>
+          <mat-select formControlName="ils">
+            <mat-option *ngFor="let x of ils" [value]="x.id">{{x.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
+        <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
+          <mat-label>Unlicensed Airfield:</mat-label>
+          <mat-select formControlName="unlicensedAirfield">
+            <mat-option *ngFor="let x of unlicensedAirfield" [value]="x.id">{{x.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
+          <mat-label>Microlight Airfield:</mat-label>
+          <mat-select formControlName="microlightAirfield">
+            <mat-option *ngFor="let x of microlightAirfield" [value]="x.id">{{x.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
+        <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
+          <mat-label>Gliding Airfield:</mat-label>
+          <mat-select formControlName="glidingAirfield">
+            <mat-option *ngFor="let x of glidingAirfield" [value]="x.id">{{x.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
+          <mat-label>Exclude Home Airfield:</mat-label>
+          <mat-select formControlName="homeAirfield">
+            <mat-option *ngFor="let x of glidingSites" [value]="x">{{x}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
+        <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
+          <mat-label>HIRTA/GVS:</mat-label>
+          <mat-select formControlName="hirtaGvs">
+            <mat-option *ngFor="let x of hirtaGvs" [value]="x.id">{{x.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
+          <mat-label>Obstacle:</mat-label>
+          <mat-select formControlName="obstacle">
+            <mat-option *ngFor="let x of obstacle" [value]="x.id">{{x.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
-
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
-      <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
-        <mat-label>Unlicensed Airfield:</mat-label>
-        <mat-select formControlName="unlicensedAirfield">
-          <mat-option *ngFor="let x of unlicensedAirfield" [value]="x.id">{{x.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
-        <mat-label>Microlight Airfield:</mat-label>
-        <mat-select formControlName="microlightAirfield">
-          <mat-option *ngFor="let x of microlightAirfield" [value]="x.id">{{x.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
-      <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
-        <mat-label>Gliding Airfield:</mat-label>
-        <mat-select formControlName="glidingAirfield">
-          <mat-option *ngFor="let x of glidingAirfield" [value]="x.id">{{x.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
-        <mat-label>Exclude Home Airfield:</mat-label>
-        <mat-select formControlName="homeAirfield">
-          <mat-option *ngFor="let x of glidingSites" [value]="x">{{x}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10%" fxLayoutGap.xs="0px">
-      <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
-        <mat-label>HIRTA/GVS:</mat-label>
-        <mat-select formControlName="hirtaGvs">
-          <mat-option *ngFor="let x of hirtaGvs" [value]="x.id">{{x.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field fxFlex.xs="auto" fxFlex="0 1 15em">
-        <mat-label>Obstacle:</mat-label>
-        <mat-select formControlName="obstacle">
-          <mat-option *ngFor="let x of obstacle" [value]="x.id">{{x.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
-</ng-container>
+  </ng-container>
+</mat-expansion-panel>
