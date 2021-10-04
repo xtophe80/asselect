@@ -439,7 +439,7 @@ function doCircle(circle: any): string[] {
 
 function doArc(arc: any, from: string): string[] {
   const dir = (arc.dir === "cw") ? "V D=+" : "V D=-";
-  const fromTo = `DB ${formatLatLon(from)},${formatLatLon(arc.to)}`;
+  const fromTo = `DB ${formatLatLon(from)}, ${formatLatLon(arc.to)}`;
 
   return [dir, formatCentre(arc.centre), fromTo];
 }
