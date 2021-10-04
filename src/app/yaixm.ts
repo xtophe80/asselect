@@ -156,7 +156,7 @@ function makeTypeFunction(opts: any) {
   const ul = (opts.airspace.microlightAirfield === 'classf') ? "F" : "G";
 
   const gliderTypes = {classf: "F", classg: "G", gsec: "W"};
-  const glider = gliderTypes[opts.airspace.glidingAirield as keyof typeof gliderTypes];
+  const glider = gliderTypes[opts.airspace.glidingAirfield as keyof typeof gliderTypes];
 
   const comp = (opts.options.format === 'competition');
 
