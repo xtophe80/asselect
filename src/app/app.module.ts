@@ -20,8 +20,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { FileSaverModule } from 'ngx-filesaver';
-
 import { AirspaceEditorComponent } from './airspace-editor/airspace-editor.component';
 import { OptionEditorComponent } from './option-editor/option-editor.component';
 import { RatsEditorComponent } from './rats-editor/rats-editor.component';
@@ -54,7 +52,6 @@ import { NotamComponent } from './notam/notam.component';
     MatToolbarModule,
     MatExpansionModule,
     FlexLayoutModule,
-    FileSaverModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

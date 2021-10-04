@@ -6,6 +6,8 @@ import { PromptUpdateService } from './prompt-update.service';
 import { YaixmService } from './yaixm.service';
 import { convert } from './yaixm';
 
+import { saveAs } from 'file-saver';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
