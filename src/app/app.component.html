@@ -13,9 +13,11 @@
         </mat-tab>
 
         <mat-tab label="Extras">
-          <app-rats-editor [airspaceForm]="formGroup" [names]="ratNames"></app-rats-editor>
-          <app-loa-editor [airspaceForm]="formGroup" [names]="loaNames"></app-loa-editor>
-          <app-wave-editor [airspaceForm]="formGroup" [names]="waveNames"></app-wave-editor>
+          <mat-accordion>
+            <app-rats-editor [airspaceForm]="formGroup" [names]="ratNames"></app-rats-editor>
+            <app-loa-editor [airspaceForm]="formGroup" [names]="loaNames"></app-loa-editor>
+            <app-wave-editor [airspaceForm]="formGroup" [names]="waveNames"></app-wave-editor>
+          </mat-accordion>
         </mat-tab>
 
         <mat-tab label="NOTAM">
