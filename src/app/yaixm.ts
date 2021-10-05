@@ -113,10 +113,11 @@ function makeAirfilter(opts: any) {
       return false;
 
     // Gliding sites
-    if (opts.airspace.glidingAirfield === 'exclude' &&
-        feature.type === "OTHER" &&
-        feature.localtype === "GLIDER" &&
-        !rules.includes("LOA"))
+    if ((feature.type === "OTHER" &&
+         feature.localtype === "GLIDER" &&
+         !rules.includes("LOA")) &&
+        (opts.airspace.glidingAirfield === 'exclude' ||
+         opts.airspace.homeAirfield === feature.name))
       return false;
 
     // Maximum level
