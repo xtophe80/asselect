@@ -55,7 +55,7 @@ export function convert(yaixm: any, opts: any): string {
     airspace = airspace.filter((feature: any) =>
       !(feature.type === "D_OTHER" &&
         feature.localtype === "GLIDER" &&
-        !opts.waves.includes(feature.name)));
+        !(opts.waves.includes(feature.name) || feature.rules.includes("LOA"))));
 
     // Merge frequencies
     if (opts.options.radioFreqs === 'append')
