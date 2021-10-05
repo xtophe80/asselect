@@ -97,6 +97,7 @@ export class AppComponent implements OnInit {
           this.waveFormArray.push(new FormControl(false));
         }
       }
+      this.waveNames.sort();
     });
   }
 
