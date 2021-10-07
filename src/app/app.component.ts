@@ -127,6 +127,6 @@ export class AppComponent implements OnInit {
     const txt = convert(this.yaixm, opts);
 
     const blob = new Blob([txt], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, "openair.txt");
+    saveAs(blob, "uk" + this.airac + ".txt");
   }
 }
