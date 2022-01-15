@@ -2,3 +2,7 @@
   margin-top: 0px;
   margin-bottom: 0px;
 }
+
+.mat-toolbar {
+  height: 48px;
+}

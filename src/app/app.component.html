@@ -1,8 +1,10 @@
-<mat-toolbar>
-  <span>ASSelect UK</span>
+<mat-toolbar fxLayout fxLayoutAlign="center center">
+  <div fxFlex.gt-md="65%" fxFlex="80%" fxFlex.xs="95%">
+    ASSelect - Customized UK Airspace data
+  </div>
 </mat-toolbar>
 
-<div class="container" fxLayout="row" fxLayoutAlign="center">
+<div fxLayout="row" fxLayoutAlign="center">
   <div fxFlex.gt-md="65%" fxFlex="80%" fxFlex.xs="95%">
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
 
