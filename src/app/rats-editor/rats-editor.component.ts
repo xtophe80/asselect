@@ -9,7 +9,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 export class RatsEditorComponent implements OnChanges {
 
   @Input() airspaceForm: FormGroup = new FormGroup({});
-  @Input() names: string[] = []
+  @Input() names: string[] = [];
 
   ngOnChanges(): void {
     // Get stored values

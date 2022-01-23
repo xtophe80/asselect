@@ -28,7 +28,7 @@ import { LoaEditorComponent } from './loa-editor/loa-editor.component';
 import { WaveEditorComponent } from './wave-editor/wave-editor.component';
 import { AboutComponent } from './about/about.component';
 import { NotamComponent } from './notam/notam.component';
-import { ReleaseDialog } from './app.component';
+import { ReleaseDialogComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { ReleaseDialog } from './app.component';
     OptionEditorComponent,
     AboutComponent,
     NotamComponent,
-    ReleaseDialog
+    ReleaseDialogComponent
   ],
   imports: [
     BrowserModule,

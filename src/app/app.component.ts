@@ -139,14 +139,15 @@ export class AppComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.dialog.open(ReleaseDialog, {data: {release_note: this.release_note}});
+    this.dialog.open(ReleaseDialogComponent,
+                     {data: {release_note: this.release_note}});
   }
 }
 
 @Component({
-  selector: 'release-dialog',
+  selector: 'app-release-dialog',
   templateUrl: 'release-dialog.html'
 })
-export class ReleaseDialog {
+export class ReleaseDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }
