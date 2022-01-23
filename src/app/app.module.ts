@@ -17,6 +17,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -27,6 +28,7 @@ import { LoaEditorComponent } from './loa-editor/loa-editor.component';
 import { WaveEditorComponent } from './wave-editor/wave-editor.component';
 import { AboutComponent } from './about/about.component';
 import { NotamComponent } from './notam/notam.component';
+import { ReleaseDialog } from './app.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { NotamComponent } from './notam/notam.component';
     WaveEditorComponent,
     OptionEditorComponent,
     AboutComponent,
-    NotamComponent
+    NotamComponent,
+    ReleaseDialog
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,7 @@ import { NotamComponent } from './notam/notam.component';
     MatCheckboxModule,
     MatToolbarModule,
     MatExpansionModule,
+    MatDialogModule,
     FlexLayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

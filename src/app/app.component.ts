@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl } from '@angular/forms';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { PromptUpdateService } from './prompt-update.service';
 
@@ -7,6 +8,10 @@ import { YaixmService } from './yaixm.service';
 import { convert } from './yaixm';
 
 import { saveAs } from 'file-saver';
+
+export interface DialogData {
+  release_note: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -18,6 +23,7 @@ export class AppComponent implements OnInit {
   yaixm = {};
 
   airac = "";
+  release_note = "";
 
   airspaceFormGroup = this.fb.group({
     atz: 'classd',
@@ -56,7 +62,8 @@ export class AppComponent implements OnInit {
 
   constructor(private promptUpdateService: PromptUpdateService,
               private yaixmService: YaixmService,
-              private fb: FormBuilder) {}
+              private fb: FormBuilder,
+              private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getYaixm();
@@ -68,6 +75,7 @@ export class AppComponent implements OnInit {
 
       // Set AIRAC date
       this.airac = yaixm.release.airac_date.substr(0, 10);
+      this.release_note = yaixm.release.note;
 
       // Get RATs
       this.ratNames = yaixm.rat.map((x: any) => x.name);
@@ -129,4 +137,16 @@ export class AppComponent implements OnInit {
     const blob = new Blob([txt], { type: "text/plain;charset=utf-8" });
     saveAs(blob, "uk" + this.airac + ".txt");
   }
+
+  openDialog(): void {
+    this.dialog.open(ReleaseDialog, {data: {release_note: this.release_note}});
+  }
+}
+
+@Component({
+  selector: 'release-dialog',
+  templateUrl: 'release-dialog.html'
+})
+export class ReleaseDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }
