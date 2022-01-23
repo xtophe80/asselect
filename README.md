@@ -12,16 +12,14 @@ The deploy configuration (including domain name) is set in angular.json.
 
 ## Airspace update
 
-Update src/assets/yaixm.json, git commit and deploy as above.
+Update src/assets/yaixm.json and deploy as above.
 
 ## NOTAMs
 
-ASSelect retreives NOTAM data from a MongoDB Atlas database. See
+ASSelect links to NOTAM data on Dropbox. See
 https://github.com/ahsparrow/navplot2 for details.
 
 ## Developing
-
-Install node.js from https://node.org and add \<install-dir\>/bin to PATH.
 
 Install npm packages from the source code top level directory):
 
