@@ -16,7 +16,7 @@ Update src/assets/yaixm.json and deploy as above.
 
 ## NOTAMs
 
-ASSelect links to NOTAM data on Google drive. See
+ASSelect links to NOTAM data on Dropbox. See
 https://github.com/ahsparrow/navplot2 for details.
 
 ## Developing
