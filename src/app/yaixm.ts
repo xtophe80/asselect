@@ -84,6 +84,7 @@ export function convert(yaixm: any, opts: any): string {
       }
     });
   });
+  lines.push("");
 
   return lines.join("\n");
 }
