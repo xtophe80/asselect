@@ -301,9 +301,6 @@ function mergeLoas(airspace: any, loas: any) {
 
   // Replace volumes
   for (const replace of replacementVolumes) {
-    if (replace.geometry.length === 0)
-      continue;
-
     // Find volume to be replaced
     const [volume, feature] = findVolume(airspace, replace.id);
     if (!feature)
