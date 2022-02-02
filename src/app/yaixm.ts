@@ -254,10 +254,16 @@ function makeNameFuction(opts: any) {
 
       // Optional sequence number
       if (addSeqno && feature.geometry.length > 1) {
-        const seqno = volume.seqno ||
-                String.fromCharCode("A".charCodeAt(0) +
-                                    feature.geometry.indexOf(volume));
-        name += `-${seqno}`;
+        name += "-"
+        if (volume.seqno) {
+          name += volume.seqno.toString()
+          if (volume.subseq) {
+            name += volume.subseq;
+          }
+        } else {
+          name += String.fromCharCode("A".charCodeAt(0) +
+                                      feature.geometry.indexOf(volume));
+        }
       }
 
       // SI & NOTAM qualifiers
@@ -306,14 +312,9 @@ function mergeLoas(airspace: any, loas: any) {
     if (!feature)
       continue;
 
-    // Update seqno, e.g 12 -> 12A, 12B, etc.
+    // Copy seqno into replacement volumes
     if (volume.seqno) {
-      if (replace.geometry.length) {
-        replace.geometry.forEach(
-          (g: any, n: number) => g.seqno = volume.seqno + AsciiUppercase[n]);
-      } else {
-        replace.geometry[0].seqno = volume.seqno;
-      }
+      replace.geometry.forEach((v: any) => v.seqno = volume.seqno);
     }
 
     // Delete old volume
