@@ -1,8 +1,6 @@
 import {formatCentre, formatDistance, formatHeader, formatLatLon,
         formatLevel, normLevel, parseLatLon} from './helpers';
 
-const AsciiUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
 const NM_TO_DEGREES = 1 / 60;
 
 const ObstacleTypes = new Map([
