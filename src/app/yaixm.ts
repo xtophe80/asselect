@@ -323,7 +323,7 @@ function mergeLoas(airspace: any, loas: any) {
 
     // Remove feature if no geometry remaining
     if (!feature.geometry.length) {
-      airspace.splice(feature.geometry.indexOf(feature), 1);
+      airspace.splice(airspace.indexOf(feature), 1);
     }
   }
 }
