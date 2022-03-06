@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   release_note = "";
 
   airspaceFormGroup = this.fb.group({
-    atz: 'classd',
+    atz: 'ctr',
     ils: 'atz',
     unlicensedAirfield: 'exclude',
     glidingAirfield: 'exclude',

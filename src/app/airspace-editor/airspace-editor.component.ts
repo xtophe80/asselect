@@ -12,8 +12,8 @@ export class AirspaceEditorComponent implements OnInit, OnChanges {
   @Input() airspaceForm: FormGroup = new FormGroup({});
 
   atz = [
-    { id: 'classd', name: 'Class D' },
-    { id: 'ctr', name: 'Control Zone'}
+    { id: 'ctr', name: 'Control Zone'},
+    { id: 'classd', name: 'Class D' }
   ];
 
   ils = [
