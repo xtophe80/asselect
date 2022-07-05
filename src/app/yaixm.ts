@@ -158,6 +158,8 @@ function makeTypeFunction(opts: any) {
   const gliderTypes = {classf: "F", classg: "G", gsec: "W"};
   const glider = gliderTypes[opts.airspace.glidingAirfield as keyof typeof gliderTypes];
 
+  const hirtaGvs = (opts.airspace.hirtaGvs === 'danger') ? "Q" : "R";
+
   const comp = (opts.options.format === 'competition');
 
   function airspaceTyper(feature: any, volume: any): string {
@@ -178,6 +180,8 @@ function makeTypeFunction(opts: any) {
       else if (comp && feature.localtype === "DZ" && rules.includes("INTENSE"))
         // Intense DZ's for comp airspace
         out = "P";
+      else if (["HIRTA", "GVS", "LASER"].includes(feature.localtype))
+        out = hirtaGvs
       else
         // Danger area, Drop zone, etc.
         out = "Q";

@@ -43,7 +43,8 @@ export class AirspaceEditorComponent implements OnInit, OnChanges {
 
   hirtaGvs = [
     { id: 'exclude', name: 'Exclude' },
-    { id: 'include', name: 'Include'}
+    { id: 'danger', name: 'Danger' },
+    { id: 'restricted', name: 'Restricted' }
   ];
 
   obstacle = [
