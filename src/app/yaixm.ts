@@ -56,8 +56,7 @@ export function convert(yaixm: any, opts: any): string {
         !(opts.waves.includes(feature.name) || feature.rules.includes("LOA"))));
 
     // Merge frequencies
-    if (opts.options.radioFreqs === 'append')
-      mergeServices(airspace, yaixm.service);
+    mergeServices(airspace, yaixm.service);
   }
 
   // Airspace filter function
@@ -274,7 +273,7 @@ function makeNameFuction(opts: any) {
         name += ` (${qualifiers.sort().reverse().join("/")})`;
       }
 
-      if (volume.frequency) {
+      if (opts.options.radioFreqs === 'append' && volume.frequency) {
         name += ` ${volume.frequency.toFixed(3)}`;
       }
     }
@@ -371,6 +370,8 @@ function doVolume(feature: any, volume: any,
   const out = ["*"];
   out.push(...doType(feature, volume, typer));
   out.push(...doName(feature, volume, namer));
+  if (volume.frequency)
+    out.push(...doFreq(volume));
   out.push(...doLevels(volume));
   out.push(...doBoundary(volume.boundary));
 
@@ -385,6 +386,10 @@ function doType(feature: any, volume: any,
 function doName(feature: any, volume: any,
                 namer: (f: any, v: any)=>string): string[] {
   return ["AN " + namer(feature, volume)];
+}
+
+function doFreq(volume: any): any[] {
+  return ["AF " + volume.frequency.toFixed(3)];
 }
 
 function doLevels(volume: any): string[] {
